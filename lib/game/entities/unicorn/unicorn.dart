@@ -9,12 +9,12 @@ class Unicorn extends PositionedEntity with HasGameRef {
   Unicorn({
     required super.position,
   }) : super(
-    anchor: Anchor.center,
-    size: Vector2.all(32),
-    behaviors: [
-      TappingBehavior(),
-    ],
-  );
+          anchor: Anchor.center,
+          size: Vector2.all(32),
+          behaviors: [
+            TappingBehavior(),
+          ],
+        );
 
   @visibleForTesting
   Unicorn.test({
@@ -43,7 +43,7 @@ class Unicorn extends PositionedEntity with HasGameRef {
       ),
     );
     final animationComponent =
-    SpriteAnimationComponent(animation: _animation, size: size);
+        SpriteAnimationComponent(animation: _animation, size: size);
     _animationTicker = animationComponent.animationTicker!;
     resetAnimation();
     _animationTicker.onComplete = resetAnimation;
