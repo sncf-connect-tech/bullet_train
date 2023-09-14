@@ -1,8 +1,7 @@
+import 'package:bullet_train/title/title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockingjay/mockingjay.dart';
-
-import 'package:bullet_train/title/title.dart';
 
 import '../../helpers/helpers.dart';
 

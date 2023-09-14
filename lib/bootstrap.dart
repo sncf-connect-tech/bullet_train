@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:bullet_train/gen/assets.gen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:bullet_train/gen/assets.gen.dart';
 
 class AppBlocObserver extends BlocObserver {
   @override

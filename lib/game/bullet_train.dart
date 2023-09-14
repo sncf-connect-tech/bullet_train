@@ -5,6 +5,7 @@ import 'package:bullet_train/game/game.dart';
 import 'package:bullet_train/l10n/l10n.dart';
 import 'package:flame/game.dart';
 
+// ignore: deprecated_member_use
 class VeryGoodFlameGame extends FlameGame with HasTappables {
   VeryGoodFlameGame({
     required this.l10n,
@@ -24,6 +25,7 @@ class VeryGoodFlameGame extends FlameGame with HasTappables {
 
   @override
   Future<void> onLoad() async {
+    // ignore: deprecated_member_use
     camera.zoom = 8;
 
     await add(CounterComponent(position: (size / 2)..sub(Vector2(0, 16))));

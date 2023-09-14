@@ -1,7 +1,7 @@
+import 'package:bullet_train/game/game.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:bullet_train/game/game.dart';
 
 class CounterComponent extends PositionComponent
     with HasGameRef<VeryGoodFlameGame> {

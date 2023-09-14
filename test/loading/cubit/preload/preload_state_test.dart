@@ -1,5 +1,5 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:bullet_train/loading/loading.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('PreloadState', () {

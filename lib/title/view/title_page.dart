@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:bullet_train/game/game.dart';
 import 'package:bullet_train/l10n/l10n.dart';
+import 'package:flutter/material.dart';
 
 class TitlePage extends StatelessWidget {
   const TitlePage({super.key});
