@@ -1,4 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:bullet_train/game/game.dart';
 import 'package:bullet_train/l10n/l10n.dart';
 import 'package:bullet_train/loading/loading.dart';
 import 'package:flame/cache.dart';
@@ -30,22 +31,28 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = ColorScheme.fromSwatch();
+    final theme = ThemeData(
+      primaryColor: colorScheme.primary,
+      colorScheme: colorScheme,
+      extensions: [
+        GameTheme(
+          background: colorScheme.background,
+          snakeHead: Colors.blue[900]!,
+          snakeBody: colorScheme.primary,
+          walls: Colors.red,
+          gridOdd: Colors.green,
+          gridEvent: Colors.lightGreen,
+          gridSize: 17,
+          speedInCellsPerSecond: 1.5,
+        ),
+      ],
+      textTheme: GoogleFonts.poppinsTextTheme(),
+    );
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: const Color(0xFF2A48DF),
-        appBarTheme: const AppBarTheme(color: Color(0xFF2A48DF)),
-        colorScheme: ColorScheme.fromSwatch(
-          accentColor: const Color(0xFF2A48DF),
-        ),
-        scaffoldBackgroundColor: const Color(0xFFFFFFFF),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(const Color(0xFF2A48DF)),
-          ),
-        ),
-        textTheme: GoogleFonts.poppinsTextTheme(),
-      ),
+      theme: theme,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       home: const LoadingPage(),

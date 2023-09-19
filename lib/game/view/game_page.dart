@@ -1,5 +1,4 @@
 import 'package:bullet_train/game/game.dart';
-import 'package:bullet_train/gen/assets.gen.dart';
 import 'package:bullet_train/l10n/l10n.dart';
 import 'package:bullet_train/loading/cubit/cubit.dart';
 import 'package:flame/game.dart' hide Route;
@@ -46,7 +45,7 @@ class _GameViewState extends State<GameView> {
   void initState() {
     super.initState();
     bgm = context.read<AudioCubit>().bgm;
-    bgm.play(Assets.audio.background);
+    // bgm.play(Assets.audio.background);
   }
 
   @override
@@ -57,14 +56,23 @@ class _GameViewState extends State<GameView> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     _game ??= widget.game ??
         VeryGoodFlameGame(
           l10n: context.l10n,
           effectPlayer: context.read<AudioCubit>().effectPlayer,
+          theme: theme.extension<GameTheme>()!,
         );
     return Stack(
       children: [
-        Positioned.fill(child: GameWidget(game: _game!)),
+        Positioned.fill(
+          child: Center(
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: GameWidget(game: _game!),
+            ),
+          ),
+        ),
         Align(
           alignment: Alignment.topRight,
           child: BlocBuilder<AudioCubit, AudioState>(

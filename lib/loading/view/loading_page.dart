@@ -41,7 +41,8 @@ class _LoadingInternal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primaryTextTheme = Theme.of(context).primaryTextTheme;
+    final theme = Theme.of(context);
+    final primaryTextTheme = theme.primaryTextTheme;
     final l10n = context.l10n;
 
     return BlocBuilder<PreloadCubit, PreloadState>(
@@ -55,14 +56,14 @@ class _LoadingInternal extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: AnimatedProgressBar(
                 progress: state.progress,
-                backgroundColor: const Color(0xFF2A48DF),
-                foregroundColor: const Color(0xFFFFFFFF),
+                backgroundColor: theme.primaryColor,
+                foregroundColor: theme.colorScheme.onPrimary,
               ),
             ),
             Text(
               loadingMessage,
               style: primaryTextTheme.bodySmall!.copyWith(
-                color: const Color(0xFF2A48DF),
+                color: theme.primaryColor,
                 fontWeight: FontWeight.w900,
               ),
             ),
