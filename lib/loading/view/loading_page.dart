@@ -1,6 +1,6 @@
 import 'package:bullet_train/l10n/l10n.dart';
 import 'package:bullet_train/loading/loading.dart';
-import 'package:bullet_train/title/title.dart';
+import 'package:bullet_train/menu/view/menu_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,7 +18,7 @@ class _LoadingPageState extends State<LoadingPage> {
     if (!mounted) {
       return;
     }
-    await navigator.pushReplacement<void, void>(TitlePage.route());
+    await navigator.pushReplacement<void, void>(MenuPage.route());
   }
 
   @override

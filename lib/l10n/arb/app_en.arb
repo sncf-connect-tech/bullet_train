@@ -4,13 +4,21 @@
   "@startVeryGoodGame": {
     "description": "The initial start button of the game application"
   },
-  "titleAppBarTitle": "Bullet Train",
-  "@titleAppBarTitle": {
-    "description": "Text shown in the AppBar of the Title Page"
+  "menuAppBarTitle": "Bullet Train",
+  "@menuAppBarTitle": {
+    "description": "Text shown in the AppBar of the Menu Page"
   },
-  "titleButtonStart": "Start",
-  "@titleButtonStart": {
-    "description": "Text shown in the start Button of the Title Page"
+  "menuButtonStart": "Start",
+  "@menuButtonStart": {
+    "description": "Text shown in the start Button of the Menu Page"
+  },
+  "menuButtonScore": "Score",
+  "@menuButtonScore": {
+    "description": "Text shown in the score Button of the Menu Page"
+  },
+  "menuButtonAbout": "About",
+  "@menuButtonAbout": {
+    "description": "Text shown in the about Button of the Menu Page"
   },
   "loading": "Loading {label}...",
   "@loading": {

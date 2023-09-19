@@ -8,8 +8,9 @@ import 'package:flame/game.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-class VeryGoodFlameGame extends FlameGame with HasKeyboardHandlerComponents {
-  VeryGoodFlameGame({
+// ignore: deprecated_member_use
+class BulletTrain extends FlameGame with HasKeyboardHandlerComponents {
+  BulletTrain({
     required this.l10n,
     required this.effectPlayer,
     required this.theme,

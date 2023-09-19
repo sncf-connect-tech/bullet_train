@@ -58,7 +58,7 @@ class _GameViewState extends State<GameView> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     _game ??= widget.game ??
-        VeryGoodFlameGame(
+        BulletTrain(
           l10n: context.l10n,
           effectPlayer: context.read<AudioCubit>().effectPlayer,
           theme: theme.extension<GameTheme>()!,
