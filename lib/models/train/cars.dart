@@ -1,5 +1,4 @@
 import 'dart:collection';
-import 'dart:ui';
 
 import 'package:bullet_train/models/foundation/foundation.dart';
 import 'package:bullet_train/models/train/train.dart';
@@ -7,9 +6,9 @@ import 'package:bullet_train/models/train/train.dart';
 class Train {
   Train({required Cell startCell}) {
     final rail = startCell.toRail(Position.bottom, Position.top);
-    _rails.addRail(rail);
 
-    _bodies.add(TrainHead._(rail: rail, offset: rail.center));
+    _rails.addRail(rail);
+    _bodies.add(TrainHead(rail: rail, offset: rail.center));
 
     for (var i = 0; i < 8; i++) {
       addCar();
@@ -61,6 +60,7 @@ class Train {
         (newOffset, pixels) = currentRail.rewind(newOffset, pixels);
         if (pixels > 0) {
           final previousRail = currentRail.previous;
+
           if (previousRail == null) break;
 
           currentRail = previousRail;
@@ -88,35 +88,4 @@ class Train {
       }
     }
   }
-}
-
-sealed class TrainBody extends LinkedListEntry<TrainBody> {
-  TrainBody({
-    required this.rail,
-    required this.offset,
-  });
-
-  Rail rail;
-  Offset? offset;
-
-  bool get isHead;
-
-  bool get isActive => offset != null;
-}
-
-base class TrainHead extends TrainBody {
-  TrainHead._({required super.rail, required super.offset});
-
-  @override
-  Offset get offset => super.offset!;
-
-  @override
-  bool get isHead => true;
-}
-
-base class TrainCar extends TrainBody {
-  TrainCar({required super.rail}) : super(offset: null);
-
-  @override
-  bool get isHead => false;
 }

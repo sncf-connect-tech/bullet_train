@@ -7,12 +7,12 @@ import 'package:flutter/painting.dart';
 class Rails {
   Rails();
 
-  final _cells = LinkedList<Rail>();
+  final _rails = LinkedList<Rail>();
 
-  Iterable<Rail> get cells => _cells;
+  Iterable<Rail> get rails => _rails;
 
-  void addRail(Rail cell) => _cells.add(cell);
-  void remove() => _cells.remove(_cells.first);
+  void addRail(Rail rail) => _rails.add(rail);
+  void remove() => _rails.remove(_rails.first);
 }
 
 final class Rail extends LinkedListEntry<Rail> {
