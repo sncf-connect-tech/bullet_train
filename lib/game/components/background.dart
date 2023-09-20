@@ -6,7 +6,7 @@ import 'package:flame/components.dart';
 import 'package:flutter/painting.dart';
 
 class GameBackgroundComponent extends PositionComponent
-    with HasGameRef<VeryGoodFlameGame> {
+    with HasGameRef<BulletTrain> {
   GameBackgroundComponent() : super(priority: GameLayer.background.priority);
 
   @override

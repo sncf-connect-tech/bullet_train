@@ -7,12 +7,9 @@ import 'package:bullet_train/models/train/train.dart';
 import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
 
-class TrainComponent extends PositionComponent
-    with HasGameRef<VeryGoodFlameGame> {
+class TrainComponent extends PositionComponent with HasGameRef<BulletTrain> {
   TrainComponent({required this.trainBody})
-      : super(
-          priority: GameLayer.train.priority,
-        );
+      : super(priority: GameLayer.train.priority);
 
   final TrainBody trainBody;
 
