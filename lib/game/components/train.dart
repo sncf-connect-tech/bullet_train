@@ -4,10 +4,12 @@ import 'dart:ui';
 import 'package:bullet_train/game/bullet_train.dart';
 import 'package:bullet_train/models/models.dart';
 import 'package:bullet_train/models/train/train.dart';
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
 
-class TrainComponent extends PositionComponent with HasGameRef<BulletTrain> {
+class TrainComponent extends PositionComponent
+    with HasGameRef<BulletTrain>, CollisionCallbacks {
   TrainComponent({required this.trainBody})
       : super(priority: GameLayer.train.priority);
 
@@ -20,11 +22,12 @@ class TrainComponent extends PositionComponent with HasGameRef<BulletTrain> {
           trainBody.isHead ? gameRef.theme.snakeHead : gameRef.theme.snakeBody;
 
     add(
-      CircleComponent(
-        paint: paint,
+      CircleHitbox(
         radius: _trainSize,
         anchor: Anchor.center,
-      ),
+      )
+        ..paint = paint
+        ..renderShape = true,
     );
   }
 
@@ -40,6 +43,18 @@ class TrainComponent extends PositionComponent with HasGameRef<BulletTrain> {
   }
 
   @override
+  void onCollisionStart(
+      Set<Vector2> intersectionPoints, PositionComponent other) {
+    super.onCollisionStart(intersectionPoints, other);
+
+    if (other is ScreenHitbox) {
+      gameRef.over();
+    } else if (other is TrainComponent) {
+      gameRef.over();
+    }
+  }
+
+  @override
   void onGameResize(Vector2 size) {
     final offset = trainBody.offset;
 
@@ -47,7 +62,7 @@ class TrainComponent extends PositionComponent with HasGameRef<BulletTrain> {
       position = offset.toVector2();
     }
 
-    children.whereType<CircleComponent>().single.radius = _trainSize;
+    children.whereType<CircleHitbox>().single.radius = _trainSize;
 
     super.onGameResize(size);
   }
