@@ -29,6 +29,15 @@
       "type": "dart",
       "program": "lib/main_production.dart",
       "args": ["--flavor", "production", "--target", "lib/main_production.dart"]
-    }
-  ]
+    },
+    {
+      "name": "Launch development (macos)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main_development.dart",
+      "args": [
+        "--target",
+        "lib/main_development.dart"
+      ]
+    },  ]
 }
