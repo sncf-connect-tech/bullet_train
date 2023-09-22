@@ -1,6 +1,9 @@
+import 'package:bullet_train/design/colors.dart';
 import 'package:bullet_train/game/game.dart';
 import 'package:bullet_train/l10n/l10n.dart';
+import 'package:bullet_train/menu/components/menu_title.dart';
 import 'package:bullet_train/menu/components/navigation_button.dart';
+import 'package:bullet_train/menu/components/neon_effect.dart';
 import 'package:flutter/material.dart';
 
 class MenuPage extends StatelessWidget {
@@ -14,13 +17,8 @@ class MenuPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.menuAppBarTitle),
-      ),
-      body: const SafeArea(child: MenuView()),
+    return const Scaffold(
+      body: SafeArea(child: MenuView()),
     );
   }
 }
@@ -32,26 +30,57 @@ class MenuView extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
 
-    return Center(
-      child: SizedBox(
-        width: 250,
-        height: 200,
+    const columnSpacing = 64.0;
+    const rowSpacing = 32.0;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: rowSpacing),
+      child: Center(
         child: Column(
           children: [
-            // FIXME: ajouter un bouton pour lancer le jeu
-            NavigationButton(
-              onPressed: () => Navigator.of(context).push(GamePage.route()),
-              title: l10n.menuButtonStart,
-            ),
-            const SizedBox(height: 30),
-            NavigationButton(
-              onPressed: () {/* TODO: ScorePage */},
-              title: l10n.menuButtonScore,
-            ),
-            const SizedBox(height: 30),
-            NavigationButton(
-              onPressed: () {/* TODO: AboutPage */},
-              title: l10n.menuButtonAbout,
+            const Expanded(child: MenuTitle()),
+            Expanded(
+              flex: 2,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Column(
+                      children: [
+                        // FIXME: ajouter un bouton pour lancer le jeu
+                        Expanded(
+                          child: NavigationButton(
+                            onPressed: () {
+                              Navigator.of(context).push(GamePage.route());
+                            },
+                            title: l10n.menuButtonStart,
+                          ),
+                        ),
+                        const SizedBox(height: columnSpacing),
+                        Expanded(
+                          child: NavigationButton(
+                            onPressed: () {/* TODO: ScorePage */},
+                            title: l10n.menuButtonScore,
+                          ),
+                        ),
+                        const SizedBox(height: columnSpacing),
+                        Expanded(
+                          child: NavigationButton(
+                            onPressed: () {/* TODO: AboutPage */},
+                            title: l10n.menuButtonAbout,
+                          ),
+                        ),
+                        const SizedBox(height: columnSpacing),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: rowSpacing),
+                  NeonEffect(
+                    color: ConnectColors.error,
+                    child: Image.asset('assets/images/bullet_train_characters.png'),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

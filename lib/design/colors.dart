@@ -11,17 +11,17 @@ class _ConnectColorsDark {
   static const Color red = Color(0xFFFF5072);
 }
 
-class ConnectColors {
-  Color get primary => _ConnectColorsDark.lightBlue;
-  Color get primaryDark => _ConnectColorsDark.blue;
-  Color get onPrimary => _ConnectColorsDark.darkBlue;
-  Color get background => _ConnectColorsDark.darkBlue;
-  Color get onBackground => _ConnectColorsDark.white;
-  Color get surface => _ConnectColorsDark.anthracite;
-  Color get onSurface => _ConnectColorsDark.white;
-  Color get hover => _ConnectColorsDark.darkGrey;
-  Color get popup => _ConnectColorsDark.darkGrey;
-  Color get textPrimary => _ConnectColorsDark.white;
-  Color get textSecondary => _ConnectColorsDark.grey;
-  Color get error => _ConnectColorsDark.red;
+abstract class ConnectColors {
+  static const Color primary = _ConnectColorsDark.lightBlue;
+  static const Color primaryDark = _ConnectColorsDark.blue;
+  static const Color onPrimary = _ConnectColorsDark.darkBlue;
+  static const Color background = _ConnectColorsDark.darkBlue;
+  static const Color onBackground = _ConnectColorsDark.white;
+  static const Color surface = _ConnectColorsDark.anthracite;
+  static const Color onSurface = _ConnectColorsDark.white;
+  static const Color hover = _ConnectColorsDark.darkGrey;
+  static const Color popup = _ConnectColorsDark.darkGrey;
+  static const Color textPrimary = _ConnectColorsDark.white;
+  static const Color textSecondary = _ConnectColorsDark.grey;
+  static const Color error = _ConnectColorsDark.red;
 }
