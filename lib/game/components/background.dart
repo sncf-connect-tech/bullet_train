@@ -11,10 +11,10 @@ class GameBackgroundComponent extends PositionComponent
 
   @override
   FutureOr<void> onLoad() {
-    for (final cell in game.world.cells.cells) {
+    for (final cell in game.world.cells) {
       add(
         RectangleComponent.fromRect(
-          cell.rect,
+          cell.getRectFromScreenSize(gameRef.size.toSize()),
           paint: _getPaintFromCellParity(cell.parity),
         ),
       );
@@ -24,7 +24,7 @@ class GameBackgroundComponent extends PositionComponent
   @override
   void onGameResize(Vector2 size) {
     final cellsRendered = children.whereType<RectangleComponent>().toList();
-    final cells = game.world.cells.cells;
+    final cells = game.world.cells;
 
     assert(
       cellsRendered.length <= cellsRendered.length,
@@ -32,7 +32,8 @@ class GameBackgroundComponent extends PositionComponent
     );
 
     for (var i = 0; i < cellsRendered.length; i++) {
-      cellsRendered[i].setByRect(cells[i].rect);
+      cellsRendered[i]
+          .setByRect(cells[i].getRectFromScreenSize(gameRef.size.toSize()));
     }
 
     super.onGameResize(size);

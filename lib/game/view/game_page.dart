@@ -61,14 +61,14 @@ class _GameViewState extends State<GameView> {
         BulletTrain(
           l10n: context.l10n,
           effectPlayer: context.read<AudioCubit>().effectPlayer,
-          theme: theme.extension<GameTheme>()!,
+          theme: theme.game,
         );
     return Stack(
       children: [
         Positioned.fill(
           child: Center(
             child: AspectRatio(
-              aspectRatio: 1,
+              aspectRatio: theme.game.gridAspectRatio,
               child: GameWidget(game: _game!),
             ),
           ),

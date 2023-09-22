@@ -7,7 +7,7 @@ const String defaultPolice = 'Avenir';
 
 class AppTheme {
   static final _baseTheme = ThemeData.dark();
-  
+
   static final ThemeData themeData = ThemeData(
     appBarTheme: const AppBarTheme(
       backgroundColor: ConnectColors.background,
@@ -45,7 +45,8 @@ class AppTheme {
         walls: ConnectColors.surface,
         gridOdd: ConnectColors.surface,
         gridEvent: ConnectColors.popup,
-        gridSize: 17,
+        gridSize: (width: 17, height: 33),
+        trainSizeFactor: 0.7,
         speedInCellsPerSecond: 3,
       ),
     ],

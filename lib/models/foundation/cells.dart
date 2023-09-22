@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:ui';
 
 enum CellParity {
@@ -8,11 +9,12 @@ enum CellParity {
       this == CellParity.odd ? CellParity.even : CellParity.odd;
 }
 
+typedef GridSize = ({int width, int height});
+
 class CellsMatrix {
   CellsMatrix({
     required this.gridSize,
-    required double screenSize,
-  }) : _cells = _generateCells(gridSize, screenSize) {
+  }) : _cells = _generateCells(gridSize) {
     for (var x = 0; x < _cells.length; x++) {
       for (var y = 0; y < _cells[x].length; y++) {
         final cell = getCell(x, y);
@@ -32,54 +34,42 @@ class CellsMatrix {
     }
   }
 
-  final int gridSize;
+  final GridSize gridSize;
   final List<List<Cell>> _cells;
 
-  List<Cell> get cells => _cells.expand((list) => list).toList(growable: false);
+  UnmodifiableListView<Cell> get cells =>
+      UnmodifiableListView(_cells.expand((list) => list));
 
   Cell getCell(int x, int y) => _cells[x][y];
 
   Cell center() {
-    final gridCenter = (gridSize / 2).floor();
-    
-    return _cells[gridCenter][gridCenter];
+    return _cells[(gridSize.width ~/ 2)][(gridSize.height ~/ 2)];
   }
 
-  void onGameResize(double scale) {
-    for (var x = 0; x < gridSize; x++) {
-      for (var y = 0; y < gridSize; y++) {
-        final rect = _cells[x][y]._rect;
-        _cells[x][y]._rect = Rect.fromLTWH(
-          rect.top * scale,
-          rect.left * scale,
-          rect.width * scale,
-          rect.height * scale,
-        );
-      }
-    }
-  }
-
-  static List<List<Cell>> _generateCells(int gridSize, double screenSize) {
-    final cellSize = screenSize / gridSize;
+  static List<List<Cell>> _generateCells(GridSize gridSize) {
     var xParity = CellParity.odd;
 
     return List.generate(
-      gridSize,
+      gridSize.width,
       (x) {
         xParity = xParity.opposite;
         var parity = xParity;
         return List.generate(
-          gridSize,
+          gridSize.height,
           (y) {
             parity = parity.opposite;
 
             return Cell._(
+              gridSize: Size(
+                gridSize.width.toDouble(),
+                gridSize.height.toDouble(),
+              ),
               parity: parity,
               rect: Rect.fromLTWH(
-                x * cellSize,
-                y * cellSize,
-                cellSize,
-                cellSize,
+                x.toDouble(),
+                y.toDouble(),
+                1,
+                1,
               ),
             );
           },
@@ -92,18 +82,25 @@ class CellsMatrix {
 class Cell {
   Cell._({
     required this.parity,
-    required Rect rect,
-  }) : _rect = rect;
+    required this.rect,
+    required Size gridSize,
+  }) : _gridSize = gridSize;
 
   final CellParity parity;
-  Rect _rect;
+  final Rect rect;
+  final Size _gridSize;
+
+  Rect getRectFromScreenSize(Size screenSize) => Rect.fromLTWH(
+        rect.left * screenSize.width / _gridSize.width,
+        rect.top * screenSize.height / _gridSize.height,
+        rect.width * screenSize.width / _gridSize.width,
+        rect.height * screenSize.height / _gridSize.height,
+      );
 
   Cell? _up;
   Cell? _down;
   Cell? _left;
   Cell? _right;
-
-  Rect get rect => _rect;
 
   Cell? get up => _up;
   Cell? get down => _down;

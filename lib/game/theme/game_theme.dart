@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:bullet_train/models/models.dart';
 import 'package:flutter/material.dart';
 
 class GameTheme extends ThemeExtension<GameTheme> {
@@ -11,8 +12,10 @@ class GameTheme extends ThemeExtension<GameTheme> {
     required this.gridOdd,
     required this.gridEvent,
     required this.gridSize,
+    required this.trainSizeFactor,
     required this.speedInCellsPerSecond,
-  }) : assert(gridSize.isOdd, 'gridSize must be odd');
+  })  : assert(gridSize.width.isOdd, 'gridSize width must be odd'),
+        assert(gridSize.height.isOdd, 'gridSize height must be odd');
 
   final Color background;
   final Color snakeHead;
@@ -21,11 +24,14 @@ class GameTheme extends ThemeExtension<GameTheme> {
   final Color gridOdd;
   final Color gridEvent;
 
-  final double speedInCellsPerSecond;
-
   /// The size of the grid in pixels
   /// /!\ Must be odd
-  final int gridSize;
+  final GridSize gridSize;
+  final double trainSizeFactor;
+
+  final double speedInCellsPerSecond;
+
+  double get gridAspectRatio => gridSize.width / gridSize.height;
 
   @override
   ThemeExtension<GameTheme> copyWith({
@@ -35,7 +41,8 @@ class GameTheme extends ThemeExtension<GameTheme> {
     Color? walls,
     Color? gridOdd,
     Color? gridEvent,
-    int? gridSize,
+    GridSize? gridSize,
+    double? trainSizeFactor,
     double? speedInCellsPerSecond,
   }) =>
       GameTheme(
@@ -46,6 +53,7 @@ class GameTheme extends ThemeExtension<GameTheme> {
         gridOdd: gridOdd ?? this.gridOdd,
         gridEvent: gridEvent ?? this.gridEvent,
         gridSize: gridSize ?? this.gridSize,
+        trainSizeFactor: trainSizeFactor ?? this.trainSizeFactor,
         speedInCellsPerSecond:
             speedInCellsPerSecond ?? this.speedInCellsPerSecond,
       );
@@ -64,8 +72,25 @@ class GameTheme extends ThemeExtension<GameTheme> {
       walls: Color.lerp(walls, other.walls, t),
       gridOdd: Color.lerp(gridOdd, other.gridOdd, t),
       gridEvent: Color.lerp(gridEvent, other.gridEvent, t),
-      gridSize: lerpDouble(gridSize.toDouble(), other.gridSize.toDouble(), t)
-          ?.round(),
+      gridSize: (
+        width: lerpDouble(
+              gridSize.width.toDouble(),
+              other.gridSize.width.toDouble(),
+              t,
+            )?.round() ??
+            other.gridSize.width,
+        height: lerpDouble(
+              gridSize.height.toDouble(),
+              other.gridSize.height.toDouble(),
+              t,
+            )?.round() ??
+            other.gridSize.height,
+      ),
+      trainSizeFactor: lerpDouble(
+        trainSizeFactor,
+        other.trainSizeFactor,
+        t,
+      ),
       speedInCellsPerSecond: lerpDouble(
         speedInCellsPerSecond,
         other.speedInCellsPerSecond,
@@ -73,4 +98,8 @@ class GameTheme extends ThemeExtension<GameTheme> {
       ),
     );
   }
+}
+
+extension GameThemeExtension on ThemeData {
+  GameTheme get game => extension<GameTheme>()!;
 }

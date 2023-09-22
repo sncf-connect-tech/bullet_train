@@ -58,7 +58,7 @@ class Train {
 
       do {
         (newOffset, pixels) = currentRail.rewind(newOffset, pixels);
-        
+
         if (pixels > 0) {
           final previousRail = currentRail.previous;
 
@@ -76,16 +76,6 @@ class Train {
 
       if (callOnNewDisplayedCar) {
         onNewDisplayedCar(car);
-      }
-    }
-  }
-
-  void onGameResize(double scale) {
-    for (final car in _bodies) {
-      final carOffset = car.offset;
-
-      if (carOffset != null) {
-        car.offset = carOffset.scale(scale, scale);
       }
     }
   }

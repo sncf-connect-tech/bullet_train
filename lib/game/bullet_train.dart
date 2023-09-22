@@ -4,7 +4,6 @@ import 'package:bullet_train/l10n/l10n.dart';
 import 'package:bullet_train/models/models.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/events.dart';
-import 'package:flame/extensions.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -31,8 +30,7 @@ class BulletTrain extends FlameGame
 
   @override
   Future<void> onLoad() async {
-    assert(size.x == size.y, 'Screen must be square for grid');
-    world = World(gridSize: theme.gridSize, screenSize: size.x);
+    world = World(gridSize: theme.gridSize);
 
     await addAll([
       GameBackgroundComponent(),
@@ -47,9 +45,7 @@ class BulletTrain extends FlameGame
 
     if (_gameOver || _paused) return;
 
-    final speedInCellsPerSecond = theme.speedInCellsPerSecond;
-    final cellSize = size.x / theme.gridSize;
-    final dtPixels = speedInCellsPerSecond * cellSize * dt;
+    final dtPixels = theme.speedInCellsPerSecond * dt;
 
     world.moveForward(
       dtPixels,
@@ -62,15 +58,6 @@ class BulletTrain extends FlameGame
   void over() {
     _gameOver = true;
     print('Game over !');
-  }
-
-  @override
-  void onGameResize(Vector2 size) {
-    if (isLoaded) {
-      world.onGameResize(size.x / this.size.x);
-    }
-
-    super.onGameResize(size);
   }
 
   @override
