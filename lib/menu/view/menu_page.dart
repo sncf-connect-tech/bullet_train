@@ -1,5 +1,6 @@
 import 'package:bullet_train/design/colors.dart';
 import 'package:bullet_train/game/game.dart';
+import 'package:bullet_train/gen/assets.gen.dart';
 import 'package:bullet_train/menu/components/menu_title.dart';
 import 'package:bullet_train/menu/components/navigation_button.dart';
 import 'package:bullet_train/menu/components/neon_effect.dart';
@@ -75,7 +76,7 @@ class MenuView extends StatelessWidget {
                   const SizedBox(width: rowSpacing),
                   NeonEffect(
                     color: ConnectColors.error,
-                    child: Image.asset('assets/images/bullet_train_characters.png'),
+                    child: Assets.images.bulletTrainCharacters.image(),
                   ),
                 ],
               ),
