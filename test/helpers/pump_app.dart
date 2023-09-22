@@ -1,5 +1,4 @@
 import 'package:bullet_train/game/cubit/cubit.dart';
-import 'package:bullet_train/l10n/l10n.dart';
 import 'package:bullet_train/loading/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,8 +20,6 @@ extension PumpApp on WidgetTester {
           BlocProvider.value(value: preloadCubit ?? MockPreloadCubit()),
         ],
         child: MaterialApp(
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
           home: navigator != null
               ? MockNavigatorProvider(navigator: navigator, child: widget)
               : widget,

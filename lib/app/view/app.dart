@@ -1,6 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:bullet_train/game/theme/app_theme.dart';
-import 'package:bullet_train/l10n/l10n.dart';
 import 'package:bullet_train/loading/loading.dart';
 import 'package:flame/cache.dart';
 import 'package:flutter/material.dart';
@@ -33,8 +32,6 @@ class AppView extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.themeData,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
       home: const LoadingPage(),
     );
   }

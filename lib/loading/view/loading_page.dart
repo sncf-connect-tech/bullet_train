@@ -1,4 +1,3 @@
-import 'package:bullet_train/l10n/l10n.dart';
 import 'package:bullet_train/loading/loading.dart';
 import 'package:bullet_train/menu/view/menu_page.dart';
 import 'package:flutter/material.dart';
@@ -43,12 +42,9 @@ class _LoadingInternal extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final primaryTextTheme = theme.primaryTextTheme;
-    final l10n = context.l10n;
 
     return BlocBuilder<PreloadCubit, PreloadState>(
       builder: (context, state) {
-        final loadingLabel = l10n.loadingPhaseLabel(state.currentLabel);
-        final loadingMessage = l10n.loading(loadingLabel);
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -61,7 +57,7 @@ class _LoadingInternal extends StatelessWidget {
               ),
             ),
             Text(
-              loadingMessage,
+              'Chargement...',
               style: primaryTextTheme.bodySmall!.copyWith(
                 color: theme.primaryColor,
                 fontWeight: FontWeight.w900,

@@ -1,6 +1,5 @@
 import 'package:bullet_train/design/colors.dart';
 import 'package:bullet_train/game/game.dart';
-import 'package:bullet_train/l10n/l10n.dart';
 import 'package:bullet_train/menu/components/menu_title.dart';
 import 'package:bullet_train/menu/components/navigation_button.dart';
 import 'package:bullet_train/menu/components/neon_effect.dart';
@@ -28,7 +27,6 @@ class MenuView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
 
     const columnSpacing = 64.0;
     const rowSpacing = 32.0;
@@ -53,21 +51,21 @@ class MenuView extends StatelessWidget {
                             onPressed: () {
                               Navigator.of(context).push(GamePage.route());
                             },
-                            title: l10n.menuButtonStart,
+                            title: 'Démarrer',
                           ),
                         ),
                         const SizedBox(height: columnSpacing),
                         Expanded(
                           child: NavigationButton(
                             onPressed: () {/* TODO: ScorePage */},
-                            title: l10n.menuButtonScore,
+                            title: 'Score',
                           ),
                         ),
                         const SizedBox(height: columnSpacing),
                         Expanded(
                           child: NavigationButton(
                             onPressed: () {/* TODO: AboutPage */},
-                            title: l10n.menuButtonAbout,
+                            title: 'À propos',
                           ),
                         ),
                         const SizedBox(height: columnSpacing),

@@ -1,5 +1,4 @@
 import 'package:bullet_train/game/game.dart';
-import 'package:bullet_train/l10n/l10n.dart';
 import 'package:bullet_train/loading/cubit/cubit.dart';
 import 'package:flame/game.dart' hide Route;
 import 'package:flame_audio/bgm.dart';
@@ -59,7 +58,6 @@ class _GameViewState extends State<GameView> {
     final theme = Theme.of(context);
     _game ??= widget.game ??
         BulletTrain(
-          l10n: context.l10n,
           effectPlayer: context.read<AudioCubit>().effectPlayer,
           theme: theme.game,
         );

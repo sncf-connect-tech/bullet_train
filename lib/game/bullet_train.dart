@@ -1,6 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:bullet_train/game/game.dart';
-import 'package:bullet_train/l10n/l10n.dart';
 import 'package:bullet_train/models/models.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/events.dart';
@@ -12,12 +11,10 @@ import 'package:flutter/widgets.dart';
 class BulletTrain extends FlameGame
     with HasKeyboardHandlerComponents, HasCollisionDetection {
   BulletTrain({
-    required this.l10n,
     required this.effectPlayer,
     required this.theme,
   });
 
-  final AppLocalizations l10n;
   final AudioPlayer effectPlayer;
   final GameTheme theme;
   late final World world;
