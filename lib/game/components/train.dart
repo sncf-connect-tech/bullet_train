@@ -19,8 +19,9 @@ class TrainComponent extends PositionComponent
   @override
   FutureOr<void> onLoad() {
     final paint = Paint()
-      ..color =
-          trainBody.isHead ? gameRef.theme.snakeHead : gameRef.theme.snakeBody;
+      ..color = trainBody.isHead
+          ? gameRef.theme.snakeHeadColor
+          : gameRef.theme.snakeBodyColor;
 
     add(
       CircleHitbox(

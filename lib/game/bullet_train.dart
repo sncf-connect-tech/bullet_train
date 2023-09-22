@@ -26,7 +26,7 @@ class BulletTrain extends FlameGame
   final _paused = false;
 
   @override
-  Color backgroundColor() => theme.background;
+  Color backgroundColor() => theme.backgroundColor;
 
   @override
   Future<void> onLoad() async {

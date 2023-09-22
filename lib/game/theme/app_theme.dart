@@ -39,12 +39,12 @@ class AppTheme {
     ),
     extensions: [
       GameTheme(
-        background: ConnectColors.background,
-        snakeHead: ConnectColors.primaryDark,
-        snakeBody: ConnectColors.primary,
-        walls: ConnectColors.surface,
-        gridOdd: ConnectColors.surface,
-        gridEvent: ConnectColors.popup,
+        backgroundColor: ConnectColors.background,
+        snakeHeadColor: ConnectColors.primaryDark,
+        snakeBodyColor: ConnectColors.primary,
+        wallsColor: ConnectColors.surface,
+        cellOddColor: ConnectColors.surface,
+        cellEvenColor: ConnectColors.popup,
         gridSize: (width: 17, height: 33),
         trainSizeFactor: 0.7,
         speedInCellsPerSecond: 3,

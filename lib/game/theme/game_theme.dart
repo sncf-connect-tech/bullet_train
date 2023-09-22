@@ -5,24 +5,24 @@ import 'package:flutter/material.dart';
 
 class GameTheme extends ThemeExtension<GameTheme> {
   GameTheme({
-    required this.background,
-    required this.snakeHead,
-    required this.snakeBody,
-    required this.walls,
-    required this.gridOdd,
-    required this.gridEvent,
+    required this.backgroundColor,
+    required this.snakeHeadColor,
+    required this.snakeBodyColor,
+    required this.wallsColor,
+    required this.cellOddColor,
+    required this.cellEvenColor,
     required this.gridSize,
     required this.trainSizeFactor,
     required this.speedInCellsPerSecond,
   })  : assert(gridSize.width.isOdd, 'gridSize width must be odd'),
         assert(gridSize.height.isOdd, 'gridSize height must be odd');
 
-  final Color background;
-  final Color snakeHead;
-  final Color snakeBody;
-  final Color walls;
-  final Color gridOdd;
-  final Color gridEvent;
+  final Color backgroundColor;
+  final Color snakeHeadColor;
+  final Color snakeBodyColor;
+  final Color wallsColor;
+  final Color cellOddColor;
+  final Color cellEvenColor;
 
   /// The size of the grid in pixels
   /// /!\ Must be odd
@@ -35,23 +35,23 @@ class GameTheme extends ThemeExtension<GameTheme> {
 
   @override
   ThemeExtension<GameTheme> copyWith({
-    Color? background,
-    Color? snakeHead,
-    Color? snakeBody,
-    Color? walls,
-    Color? gridOdd,
-    Color? gridEvent,
+    Color? backgroundColor,
+    Color? snakeHeadColor,
+    Color? snakeBodyColor,
+    Color? wallsColor,
+    Color? cellOddColor,
+    Color? cellEvenColor,
     GridSize? gridSize,
     double? trainSizeFactor,
     double? speedInCellsPerSecond,
   }) =>
       GameTheme(
-        background: background ?? this.background,
-        snakeHead: snakeHead ?? this.snakeHead,
-        snakeBody: snakeBody ?? this.snakeBody,
-        walls: walls ?? this.walls,
-        gridOdd: gridOdd ?? this.gridOdd,
-        gridEvent: gridEvent ?? this.gridEvent,
+        backgroundColor: backgroundColor ?? this.backgroundColor,
+        snakeHeadColor: snakeHeadColor ?? this.snakeHeadColor,
+        snakeBodyColor: snakeBodyColor ?? this.snakeBodyColor,
+        wallsColor: wallsColor ?? this.wallsColor,
+        cellOddColor: cellOddColor ?? this.cellOddColor,
+        cellEvenColor: cellEvenColor ?? this.cellEvenColor,
         gridSize: gridSize ?? this.gridSize,
         trainSizeFactor: trainSizeFactor ?? this.trainSizeFactor,
         speedInCellsPerSecond:
@@ -66,12 +66,12 @@ class GameTheme extends ThemeExtension<GameTheme> {
     if (other == null) return this;
 
     return copyWith(
-      background: Color.lerp(background, other.background, t),
-      snakeHead: Color.lerp(snakeHead, other.snakeHead, t),
-      snakeBody: Color.lerp(snakeBody, other.snakeBody, t),
-      walls: Color.lerp(walls, other.walls, t),
-      gridOdd: Color.lerp(gridOdd, other.gridOdd, t),
-      gridEvent: Color.lerp(gridEvent, other.gridEvent, t),
+      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t),
+      snakeHeadColor: Color.lerp(snakeHeadColor, other.snakeHeadColor, t),
+      snakeBodyColor: Color.lerp(snakeBodyColor, other.snakeBodyColor, t),
+      wallsColor: Color.lerp(wallsColor, other.wallsColor, t),
+      cellOddColor: Color.lerp(cellOddColor, other.cellOddColor, t),
+      cellEvenColor: Color.lerp(cellEvenColor, other.cellEvenColor, t),
       gridSize: (
         width: lerpDouble(
               gridSize.width.toDouble(),

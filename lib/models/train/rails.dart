@@ -39,8 +39,9 @@ final class Rail extends LinkedListEntry<Rail> {
       _move(offset, pixels, _MoveDirection.backward);
 
   void moveNextTo(Position position) {
-    if (from != position) {
-      nextOrCreate()._to = position;
+    final nextRail = nextOrCreate();
+    if (nextRail.from != position) {
+      nextRail._to = position;
     }
   }
 

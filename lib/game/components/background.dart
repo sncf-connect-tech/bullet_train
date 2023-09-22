@@ -45,9 +45,9 @@ class GameBackgroundComponent extends PositionComponent
 
     switch (parity) {
       case CellParity.odd:
-        paint.color = theme.gridOdd;
+        paint.color = theme.cellOddColor;
       case CellParity.even:
-        paint.color = theme.gridEvent;
+        paint.color = theme.cellEvenColor;
     }
 
     return paint;
