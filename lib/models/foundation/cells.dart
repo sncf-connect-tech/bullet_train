@@ -1,5 +1,9 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:collection';
 import 'dart:ui';
+
+import 'package:flutter/foundation.dart';
 
 enum CellParity {
   odd,
@@ -79,6 +83,7 @@ class CellsMatrix {
   }
 }
 
+@immutable
 class Cell {
   Cell._({
     required this.parity,
@@ -106,4 +111,29 @@ class Cell {
   Cell? get down => _down;
   Cell? get left => _left;
   Cell? get right => _right;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        other is Cell &&
+            runtimeType == other.runtimeType &&
+            parity == other.parity &&
+            rect == other.rect &&
+            _gridSize == other._gridSize &&
+            up == other.up &&
+            down == other.down &&
+            left == other.left &&
+            right == other.right;
+  }
+
+  @override
+  int get hashCode => Object.hash(
+        parity,
+        rect,
+        _gridSize,
+        up,
+        down,
+        left,
+        right,
+      );
 }

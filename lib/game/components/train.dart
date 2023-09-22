@@ -4,7 +4,6 @@ import 'dart:ui';
 
 import 'package:bullet_train/game/bullet_train.dart';
 import 'package:bullet_train/models/models.dart';
-import 'package:bullet_train/models/train/train.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
