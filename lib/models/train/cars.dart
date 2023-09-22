@@ -58,6 +58,7 @@ class Train {
 
       do {
         (newOffset, pixels) = currentRail.rewind(newOffset, pixels);
+        
         if (pixels > 0) {
           final previousRail = currentRail.previous;
 

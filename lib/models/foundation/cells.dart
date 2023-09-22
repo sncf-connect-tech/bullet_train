@@ -11,7 +11,7 @@ enum CellParity {
 class CellsMatrix {
   CellsMatrix({
     required this.gridSize,
-    required this.screenSize,
+    required double screenSize,
   }) : _cells = _generateCells(gridSize, screenSize) {
     for (var x = 0; x < _cells.length; x++) {
       for (var y = 0; y < _cells[x].length; y++) {
@@ -33,20 +33,16 @@ class CellsMatrix {
   }
 
   final int gridSize;
-  final double screenSize;
   final List<List<Cell>> _cells;
+
   List<Cell> get cells => _cells.expand((list) => list).toList(growable: false);
 
   Cell getCell(int x, int y) => _cells[x][y];
 
   Cell center() {
-    final offset = Offset(
-      screenSize / 2,
-      screenSize / 2,
-    );
-    final cellSize = screenSize / gridSize;
-    return _cells[(offset.dx / cellSize).floor()]
-        [(offset.dy / cellSize).floor()];
+    final gridCenter = (gridSize / 2).floor();
+    
+    return _cells[gridCenter][gridCenter];
   }
 
   void onGameResize(double scale) {

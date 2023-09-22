@@ -24,6 +24,7 @@ class BulletTrain extends FlameGame
   late final World world;
 
   var _gameOver = false;
+  final _paused = false;
 
   @override
   Color backgroundColor() => theme.background;
@@ -44,7 +45,7 @@ class BulletTrain extends FlameGame
   void update(double dt) {
     super.update(dt);
 
-    if (_gameOver) return;
+    if (_gameOver || _paused) return;
 
     final speedInCellsPerSecond = theme.speedInCellsPerSecond;
     final cellSize = size.x / theme.gridSize;

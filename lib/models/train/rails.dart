@@ -112,18 +112,10 @@ final class Rail extends LinkedListEntry<Rail> {
     if (pixels == 0) return (offset, 0);
 
     final rect = cell.rect;
-
-    late Position from;
-    late Position to;
-
-    switch (direction) {
-      case _MoveDirection.backward:
-        from = _to;
-        to = _from;
-      case _MoveDirection.forward:
-        from = _from;
-        to = _to;
-    }
+    final (from, to) = switch (direction) {
+      _MoveDirection.backward => (_to, _from),
+      _MoveDirection.forward => (_from, _to)
+    };
 
     switch (from) {
       case Position.top:
@@ -212,6 +204,7 @@ final class Rail extends LinkedListEntry<Rail> {
         }
       case Position.unknown:
     }
+
     throw BadDirectionError();
   }
 }
