@@ -45,14 +45,29 @@ class BulletTrain extends FlameGame
 
     if (_gameOver || _paused) return;
 
+    final trainCarsToRemove = children
+        .whereType<TrainComponent>()
+        .where((tc) => !world.train.bodies.any((b) => b == tc.trainBody));
+
+    for (final car in trainCarsToRemove) {
+      car.removeFromParent();
+    }
+
     final dtPixels = theme.speedInCellsPerSecond * dt;
 
-    world.moveForward(
-      dtPixels,
-      onNewDisplayedCar: (car) {
-        add(TrainComponent(trainBody: car));
-      },
-    );
+    world
+      ..moveForward(
+        dtPixels,
+        onNewDisplayedCar: (car) {
+          add(TrainComponent(trainBody: car));
+        },
+      )
+      ..addPassengerIfNeeded(
+        trainSize: world.train.bodies.length,
+        onPassengerAdded: (passenger) {
+          add(PassengerComponent(passenger: passenger));
+        },
+      );
   }
 
   void over() {

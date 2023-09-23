@@ -42,10 +42,13 @@ class AppTheme {
         backgroundColor: ConnectColors.background,
         snakeHeadColor: ConnectColors.primaryDark,
         snakeBodyColor: ConnectColors.primary,
+        passengerHeroColor: Colors.green, // TODO(Alexis): en connect color
+        passengerVilainColor: Colors.red, // TODO(Alexis): idem
         wallsColor: ConnectColors.surface,
         cellOddColor: ConnectColors.surface,
         cellEvenColor: ConnectColors.popup,
         gridSize: (width: 17, height: 33),
+        passengerSizeFactor: 0.5,
         trainSizeFactor: 0.7,
         speedInCellsPerSecond: 3,
       ),

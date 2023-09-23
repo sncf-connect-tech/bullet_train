@@ -27,6 +27,10 @@ class Train {
     _bodies.add(TrainCar(rail: _bodies.last.rail));
   }
 
+  void removeCar() {
+    _bodies.remove(_bodies.last);
+  }
+
   void moveNextTo(Position position) {
     head.rail.moveNextTo(position);
   }

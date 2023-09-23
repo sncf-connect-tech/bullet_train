@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:math' as math;
 import 'dart:ui';
 
-import 'package:bullet_train/game/bullet_train.dart';
+import 'package:bullet_train/game/game.dart';
 import 'package:bullet_train/models/models.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
@@ -24,7 +24,7 @@ class TrainComponent extends PositionComponent
 
     add(
       CircleHitbox(
-        radius: _trainSize,
+        radius: _trainRadius,
         anchor: Anchor.center,
         isSolid: true,
       )
@@ -51,6 +51,16 @@ class TrainComponent extends PositionComponent
       gameRef.over();
     } else if (other is TrainComponent) {
       gameRef.over();
+    } else if (other is PassengerComponent) {
+      gameRef.world.removePassenger(other.passenger);
+      other.removeFromParent();
+
+      switch (other.passenger.type) {
+        case PassengerType.hero:
+          gameRef.world.addTrainCar();
+        case PassengerType.vilain:
+          gameRef.world.removeTrainCar();
+      }
     }
   }
 
@@ -58,7 +68,7 @@ class TrainComponent extends PositionComponent
   void onGameResize(Vector2 size) {
     _updatePosition();
 
-    children.whereType<CircleHitbox>().single.radius = _trainSize;
+    children.whereType<CircleHitbox>().single.radius = _trainRadius;
 
     super.onGameResize(size);
   }
@@ -67,16 +77,13 @@ class TrainComponent extends PositionComponent
     final offset = trainBody.offset;
 
     if (offset != null) {
-      position = offset
-          .scale(
-            game.size.x / gameRef.world.gridSize.width,
-            game.size.y / gameRef.world.gridSize.height,
-          )
+      position = trainBody.rail.cell
+          .getOffsetFromScreenSize(offset, gameRef.size.toSize())
           .toVector2();
     }
   }
 
-  double get _trainSize {
+  double get _trainRadius {
     final trainSizeFactor = game.theme.trainSizeFactor;
     return math.min(
       game.size.x / game.theme.gridSize.width / 2 * trainSizeFactor,

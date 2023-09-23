@@ -21,6 +21,7 @@ class World {
   final Passengers _passengers;
 
   UnmodifiableListView<Cell> get cells => _matrix.cells;
+  Passengers get passengers => _passengers;
 
   Size get gridSize => Size(
         _matrix.gridSize.width.toDouble(),
@@ -36,11 +37,15 @@ class World {
   void moveNextTo(Position position) => train.moveNextTo(position);
 
   void addTrainCar() => train.addCar();
+  void removeTrainCar() => train.removeCar();
 
   final _random = Random(DateTime.now().millisecondsSinceEpoch);
 
-  void generatePassengers(double dt) {
-    if (_passengers.isEmpty) {
+  void addPassengerIfNeeded({
+    required int trainSize,
+    required void Function(Passenger passenger) onPassengerAdded,
+  }) {
+    if (!_passengers.any((p) => p.type == PassengerType.hero)) {
       final allOffsets = <Cell>{};
       for (var x = 0; x < gridSize.width; x++) {
         for (var y = 0; y < gridSize.height; y++) {
@@ -50,19 +55,29 @@ class World {
       final cars = Set<Cell>.from(
         train.bodies.map((body) => body.rail.cell),
       );
-      final availableOffsets = allOffsets.intersection(cars).toList();
+      final availableOffsets = allOffsets.difference(cars).toList();
 
       if (availableOffsets.isEmpty) return;
-      final result = availableOffsets[_random.nextInt(availableOffsets.length)];
-      final passengerType =
-          switch (_random.nextInt(PassengerType.values.length)) {
-        0 => PassengerType.badGuy,
-        1 => PassengerType.goodGuy,
-        _ => PassengerType.badGuy,
-      };
 
-      _passengers
-          .add(Passenger(type: passengerType, position: result.rect.center));
+      final result = availableOffsets[_random.nextInt(availableOffsets.length)];
+
+      final passenger = Passenger(type: PassengerType.hero, cell: result);
+
+      final vilains = _passengers.where((p) => p.type == PassengerType.vilain);
+
+      while (vilains.length < trainSize - 2) {
+        final vilain = Passenger(
+          type: PassengerType.vilain,
+          cell: availableOffsets[_random.nextInt(availableOffsets.length)],
+        );
+        _passengers.add(vilain);
+        onPassengerAdded(vilain);
+      }
+
+      _passengers.add(passenger);
+      onPassengerAdded(passenger);
     }
   }
+
+  void removePassenger(Passenger passenger) => _passengers.remove(passenger);
 }

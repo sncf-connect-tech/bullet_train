@@ -51,7 +51,7 @@ final class Rail extends LinkedListEntry<Rail> {
     if (result != null) return result;
 
     result = Rail(
-      cell: nextCell,
+      cell: _nextCell,
       from: to.opposite,
       to: to,
     );
@@ -61,7 +61,7 @@ final class Rail extends LinkedListEntry<Rail> {
     return result;
   }
 
-  Cell get nextCell {
+  Cell get _nextCell {
     Cell? result;
 
     switch (_to) {

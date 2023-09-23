@@ -8,10 +8,13 @@ class GameTheme extends ThemeExtension<GameTheme> {
     required this.backgroundColor,
     required this.snakeHeadColor,
     required this.snakeBodyColor,
+    required this.passengerHeroColor,
+    required this.passengerVilainColor,
     required this.wallsColor,
     required this.cellOddColor,
     required this.cellEvenColor,
     required this.gridSize,
+    required this.passengerSizeFactor,
     required this.trainSizeFactor,
     required this.speedInCellsPerSecond,
   })  : assert(gridSize.width.isOdd, 'gridSize width must be odd'),
@@ -20,6 +23,8 @@ class GameTheme extends ThemeExtension<GameTheme> {
   final Color backgroundColor;
   final Color snakeHeadColor;
   final Color snakeBodyColor;
+  final Color passengerHeroColor;
+  final Color passengerVilainColor;
   final Color wallsColor;
   final Color cellOddColor;
   final Color cellEvenColor;
@@ -27,6 +32,7 @@ class GameTheme extends ThemeExtension<GameTheme> {
   /// The size of the grid in pixels
   /// /!\ Must be odd
   final GridSize gridSize;
+  final double passengerSizeFactor;
   final double trainSizeFactor;
 
   final double speedInCellsPerSecond;
@@ -38,10 +44,13 @@ class GameTheme extends ThemeExtension<GameTheme> {
     Color? backgroundColor,
     Color? snakeHeadColor,
     Color? snakeBodyColor,
+    Color? passengerHeroColor,
+    Color? passengerVilainColor,
     Color? wallsColor,
     Color? cellOddColor,
     Color? cellEvenColor,
     GridSize? gridSize,
+    double? passengerSizeFactor,
     double? trainSizeFactor,
     double? speedInCellsPerSecond,
   }) =>
@@ -49,10 +58,13 @@ class GameTheme extends ThemeExtension<GameTheme> {
         backgroundColor: backgroundColor ?? this.backgroundColor,
         snakeHeadColor: snakeHeadColor ?? this.snakeHeadColor,
         snakeBodyColor: snakeBodyColor ?? this.snakeBodyColor,
+        passengerHeroColor: passengerHeroColor ?? this.passengerHeroColor,
+        passengerVilainColor: passengerVilainColor ?? this.passengerVilainColor,
         wallsColor: wallsColor ?? this.wallsColor,
         cellOddColor: cellOddColor ?? this.cellOddColor,
         cellEvenColor: cellEvenColor ?? this.cellEvenColor,
         gridSize: gridSize ?? this.gridSize,
+        passengerSizeFactor: passengerSizeFactor ?? this.passengerSizeFactor,
         trainSizeFactor: trainSizeFactor ?? this.trainSizeFactor,
         speedInCellsPerSecond:
             speedInCellsPerSecond ?? this.speedInCellsPerSecond,
@@ -69,6 +81,13 @@ class GameTheme extends ThemeExtension<GameTheme> {
       backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t),
       snakeHeadColor: Color.lerp(snakeHeadColor, other.snakeHeadColor, t),
       snakeBodyColor: Color.lerp(snakeBodyColor, other.snakeBodyColor, t),
+      passengerHeroColor:
+          Color.lerp(passengerHeroColor, other.passengerHeroColor, t),
+      passengerVilainColor: Color.lerp(
+        passengerVilainColor,
+        other.passengerVilainColor,
+        t,
+      ),
       wallsColor: Color.lerp(wallsColor, other.wallsColor, t),
       cellOddColor: Color.lerp(cellOddColor, other.cellOddColor, t),
       cellEvenColor: Color.lerp(cellEvenColor, other.cellEvenColor, t),
@@ -85,6 +104,11 @@ class GameTheme extends ThemeExtension<GameTheme> {
               t,
             )?.round() ??
             other.gridSize.height,
+      ),
+      passengerSizeFactor: lerpDouble(
+        passengerSizeFactor,
+        other.passengerSizeFactor,
+        t,
       ),
       trainSizeFactor: lerpDouble(
         trainSizeFactor,

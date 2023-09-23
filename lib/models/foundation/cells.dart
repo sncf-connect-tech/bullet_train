@@ -112,28 +112,8 @@ class Cell {
   Cell? get left => _left;
   Cell? get right => _right;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        other is Cell &&
-            runtimeType == other.runtimeType &&
-            parity == other.parity &&
-            rect == other.rect &&
-            _gridSize == other._gridSize &&
-            up == other.up &&
-            down == other.down &&
-            left == other.left &&
-            right == other.right;
-  }
-
-  @override
-  int get hashCode => Object.hash(
-        parity,
-        rect,
-        _gridSize,
-        up,
-        down,
-        left,
-        right,
+  Offset getOffsetFromScreenSize(Offset offset, Size screenSize) => Offset(
+        offset.dx * screenSize.width / _gridSize.width,
+        offset.dy * screenSize.height / _gridSize.height,
       );
 }
