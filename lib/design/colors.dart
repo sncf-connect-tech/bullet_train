@@ -9,6 +9,7 @@ class _ConnectColorsDark {
   static const Color grey = Color(0xFF9DA0A5);
   static const Color darkGrey = Color(0xFF293846);
   static const Color red = Color(0xFFFF5072);
+  static const Color green = Color(0xFF6BDB64);
 }
 
 abstract class ConnectColors {
@@ -24,4 +25,5 @@ abstract class ConnectColors {
   static const Color textPrimary = _ConnectColorsDark.white;
   static const Color textSecondary = _ConnectColorsDark.grey;
   static const Color error = _ConnectColorsDark.red;
+  static const Color success = _ConnectColorsDark.green;
 }

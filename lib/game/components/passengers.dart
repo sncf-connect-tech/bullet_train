@@ -21,7 +21,7 @@ class PassengerComponent extends CircleComponent with HasGameRef<BulletTrain> {
     final paint = Paint()
       ..color = switch (passenger.type) {
         PassengerType.hero => gameRef.theme.passengerHeroColor,
-        PassengerType.vilain => gameRef.theme.passengerVilainColor
+        PassengerType.vilain => gameRef.theme.passengerVillainColor
       };
 
     add(

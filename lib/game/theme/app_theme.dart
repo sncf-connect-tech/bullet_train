@@ -32,7 +32,7 @@ class AppTheme {
       error: ConnectColors.error,
       onError: ConnectColors.error,
       onPrimary: ConnectColors.onPrimary,
-      onSecondary: Colors.green,
+      onSecondary: ConnectColors.success,
       onSurface: ConnectColors.onSurface,
       onBackground: ConnectColors.onBackground,
       brightness: _baseTheme.brightness,
@@ -42,8 +42,8 @@ class AppTheme {
         backgroundColor: ConnectColors.background,
         snakeHeadColor: ConnectColors.primaryDark,
         snakeBodyColor: ConnectColors.primary,
-        passengerHeroColor: Colors.green, // TODO(Alexis): en connect color
-        passengerVilainColor: Colors.red, // TODO(Alexis): idem
+        passengerHeroColor: ConnectColors.success,
+        passengerVillainColor: ConnectColors.error,
         wallsColor: ConnectColors.surface,
         cellOddColor: ConnectColors.surface,
         cellEvenColor: ConnectColors.popup,

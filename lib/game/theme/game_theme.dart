@@ -9,7 +9,7 @@ class GameTheme extends ThemeExtension<GameTheme> {
     required this.snakeHeadColor,
     required this.snakeBodyColor,
     required this.passengerHeroColor,
-    required this.passengerVilainColor,
+    required this.passengerVillainColor,
     required this.wallsColor,
     required this.cellOddColor,
     required this.cellEvenColor,
@@ -24,7 +24,7 @@ class GameTheme extends ThemeExtension<GameTheme> {
   final Color snakeHeadColor;
   final Color snakeBodyColor;
   final Color passengerHeroColor;
-  final Color passengerVilainColor;
+  final Color passengerVillainColor;
   final Color wallsColor;
   final Color cellOddColor;
   final Color cellEvenColor;
@@ -49,7 +49,7 @@ class GameTheme extends ThemeExtension<GameTheme> {
     gridSize: (width: 17, height: 33),
     speedInCellsPerSecond: 2,
     passengerHeroColor: Colors.green,
-    passengerVilainColor: Colors.red,
+    passengerVillainColor: Colors.red,
     passengerSizeFactor: 0.5,
     trainSizeFactor: 0.7,
   );
@@ -74,7 +74,7 @@ class GameTheme extends ThemeExtension<GameTheme> {
         snakeHeadColor: snakeHeadColor ?? this.snakeHeadColor,
         snakeBodyColor: snakeBodyColor ?? this.snakeBodyColor,
         passengerHeroColor: passengerHeroColor ?? this.passengerHeroColor,
-        passengerVilainColor: passengerVilainColor ?? this.passengerVilainColor,
+        passengerVillainColor: passengerVilainColor ?? this.passengerVillainColor,
         wallsColor: wallsColor ?? this.wallsColor,
         cellOddColor: cellOddColor ?? this.cellOddColor,
         cellEvenColor: cellEvenColor ?? this.cellEvenColor,
@@ -99,8 +99,8 @@ class GameTheme extends ThemeExtension<GameTheme> {
       passengerHeroColor:
           Color.lerp(passengerHeroColor, other.passengerHeroColor, t),
       passengerVilainColor: Color.lerp(
-        passengerVilainColor,
-        other.passengerVilainColor,
+        passengerVillainColor,
+        other.passengerVillainColor,
         t,
       ),
       wallsColor: Color.lerp(wallsColor, other.wallsColor, t),
