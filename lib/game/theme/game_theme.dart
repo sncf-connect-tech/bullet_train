@@ -60,7 +60,7 @@ class GameTheme extends ThemeExtension<GameTheme> {
     Color? snakeHeadColor,
     Color? snakeBodyColor,
     Color? passengerHeroColor,
-    Color? passengerVilainColor,
+    Color? passengerVillainColor,
     Color? wallsColor,
     Color? cellOddColor,
     Color? cellEvenColor,
@@ -75,7 +75,7 @@ class GameTheme extends ThemeExtension<GameTheme> {
         snakeBodyColor: snakeBodyColor ?? this.snakeBodyColor,
         passengerHeroColor: passengerHeroColor ?? this.passengerHeroColor,
         passengerVillainColor:
-            passengerVilainColor ?? this.passengerVillainColor,
+            passengerVillainColor ?? this.passengerVillainColor,
         wallsColor: wallsColor ?? this.wallsColor,
         cellOddColor: cellOddColor ?? this.cellOddColor,
         cellEvenColor: cellEvenColor ?? this.cellEvenColor,
@@ -99,7 +99,7 @@ class GameTheme extends ThemeExtension<GameTheme> {
       snakeBodyColor: Color.lerp(snakeBodyColor, other.snakeBodyColor, t),
       passengerHeroColor:
           Color.lerp(passengerHeroColor, other.passengerHeroColor, t),
-      passengerVilainColor: Color.lerp(
+      passengerVillainColor: Color.lerp(
         passengerVillainColor,
         other.passengerVillainColor,
         t,
