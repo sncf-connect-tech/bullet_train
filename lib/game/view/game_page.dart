@@ -1,3 +1,4 @@
+import 'package:bullet_train/game/components/game_over.dart';
 import 'package:bullet_train/game/game.dart';
 import 'package:bullet_train/loading/cubit/cubit.dart';
 import 'package:flame/game.dart' hide Route;
@@ -38,6 +39,7 @@ class GameView extends StatefulWidget {
 
 class _GameViewState extends State<GameView> {
   FlameGame? _game;
+  bool _gameOver = false;
 
   late final Bgm bgm;
 
@@ -63,6 +65,11 @@ class _GameViewState extends State<GameView> {
         BulletTrain(
           effectPlayer: context.read<AudioCubit>().effectPlayer,
           theme: gameTheme,
+          onGameOver: () {
+            setState(() {
+              _gameOver = true;
+            });
+          }
         );
     return Stack(
       children: [
@@ -85,6 +92,30 @@ class _GameViewState extends State<GameView> {
                 onPressed: () => context.read<AudioCubit>().toggleVolume(),
               );
             },
+          ),
+        ),
+        AnimatedOpacity(
+          opacity: _gameOver ? 1.0 : 0.0,
+          duration: const Duration(milliseconds: 500),
+          child: Visibility(
+            visible: _gameOver,
+            child: Center(
+              child: GameOver(
+                onPressContinue: () {
+                  setState(() {
+                    _gameOver = false;
+                  });
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(GamePage.route());
+                },
+                onPressLeave: () {
+                  setState(() {
+                    _gameOver = false;
+                  });
+                  Navigator.of(context).pop();
+                },
+              ),
+            ),
           ),
         ),
       ],

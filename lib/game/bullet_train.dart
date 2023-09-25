@@ -12,12 +12,14 @@ class BulletTrain extends FlameGame
   BulletTrain({
     required this.effectPlayer,
     GameTheme? theme,
+    this.onGameOver,
   }) : theme = theme ?? GameTheme.defaultGameTheme;
 
   final AudioPlayer effectPlayer;
   final GameTheme theme;
+  final VoidCallback? onGameOver;
 
-  late final World world;
+  late World world;
 
   var _gameOver = false;
   final _paused = false;
@@ -69,7 +71,7 @@ class BulletTrain extends FlameGame
 
   void over() {
     _gameOver = true;
-    print('Game over !');
+    onGameOver?.call();
   }
 
   @override

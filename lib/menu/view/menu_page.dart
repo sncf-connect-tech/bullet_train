@@ -1,9 +1,10 @@
 import 'package:bullet_train/design/colors.dart';
+import 'package:bullet_train/design/components/navigation_button.dart';
+import 'package:bullet_train/design/components/neon_effect.dart';
+import 'package:bullet_train/design/dimens.dart';
 import 'package:bullet_train/game/game.dart';
 import 'package:bullet_train/gen/assets.gen.dart';
 import 'package:bullet_train/menu/components/menu_title.dart';
-import 'package:bullet_train/menu/components/navigation_button.dart';
-import 'package:bullet_train/menu/components/neon_effect.dart';
 import 'package:flutter/material.dart';
 
 class MenuPage extends StatelessWidget {
@@ -28,9 +29,6 @@ class MenuView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const columnSpacing = 64.0;
-    const rowSpacing = 32.0;
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: rowSpacing),
       child: Center(
