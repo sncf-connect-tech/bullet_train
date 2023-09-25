@@ -1,4 +1,3 @@
-
 import 'package:bullet_train/design/colors.dart';
 import 'package:bullet_train/menu/components/neon_effect.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,8 @@ class MenuTitle extends StatelessWidget {
       children: [
         NeonEffect(
           color: ConnectColors.error,
-          child: Text('弾丸列車',
+          child: Text(
+            '弾丸列車',
             style: TextStyle(
               color: ConnectColors.error,
               fontWeight: FontWeight.w900,
@@ -24,7 +24,8 @@ class MenuTitle extends StatelessWidget {
         ),
         NeonEffect(
           color: ConnectColors.error,
-          child: Text('BULLET TRAIN',
+          child: Text(
+            'BULLET TRAIN',
             style: TextStyle(
               color: ConnectColors.textPrimary,
               fontWeight: FontWeight.bold,

@@ -28,7 +28,6 @@ class MenuView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     const columnSpacing = 64.0;
     const rowSpacing = 32.0;
 

@@ -22,7 +22,7 @@ class NeonEffect extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       children: [
         Transform.translate(
-        offset: Offset.zero,
+          offset: Offset.zero,
           child: ImageFiltered(
             imageFilter: ImageFilter.blur(
               sigmaX: sigma,

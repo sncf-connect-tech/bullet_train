@@ -15,7 +15,8 @@ class NavigationButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       child: Center(
-        child: Text(title,
+        child: Text(
+          title,
           style: Theme.of(context).textTheme.titleLarge,
         ),
       ),

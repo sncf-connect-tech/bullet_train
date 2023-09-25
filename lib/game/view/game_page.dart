@@ -56,8 +56,8 @@ class _GameViewState extends State<GameView> {
 
   @override
   Widget build(BuildContext context) {
-    final gameTheme = Theme.of(context).extension<GameTheme>()
-        ?? GameTheme.defaultGameTheme;
+    final gameTheme =
+        Theme.of(context).extension<GameTheme>() ?? GameTheme.defaultGameTheme;
 
     _game ??= widget.game ??
         BulletTrain(

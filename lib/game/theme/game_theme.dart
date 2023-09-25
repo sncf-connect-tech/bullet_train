@@ -74,7 +74,8 @@ class GameTheme extends ThemeExtension<GameTheme> {
         snakeHeadColor: snakeHeadColor ?? this.snakeHeadColor,
         snakeBodyColor: snakeBodyColor ?? this.snakeBodyColor,
         passengerHeroColor: passengerHeroColor ?? this.passengerHeroColor,
-        passengerVillainColor: passengerVilainColor ?? this.passengerVillainColor,
+        passengerVillainColor:
+            passengerVilainColor ?? this.passengerVillainColor,
         wallsColor: wallsColor ?? this.wallsColor,
         cellOddColor: cellOddColor ?? this.cellOddColor,
         cellEvenColor: cellEvenColor ?? this.cellEvenColor,

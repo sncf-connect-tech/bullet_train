@@ -7,7 +7,6 @@ import 'package:flame/game.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-
 class BulletTrain extends FlameGame
     with HasKeyboardHandlerComponents, HasCollisionDetection {
   BulletTrain({
