@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:math' as math;
 import 'dart:ui';
 
 import 'package:bullet_train/models/foundation/foundation.dart';
@@ -9,9 +10,9 @@ class Train {
     final rail = startCell.toRail(Position.bottom, Position.top);
 
     _rails.addRail(rail);
-    _bodies.add(TrainHead(rail: rail, offset: rail.center));
+    _bodies.add(TrainHead(rail: rail, offset: rail.center, angle: math.pi / 2));
 
-    for (var i = 0; i < 4; i++) {
+    for (var i = 0; i < 3; i++) {
       addCar();
     }
   }
@@ -43,9 +44,10 @@ class Train {
     var currentRail = head.rail;
     var newOffset = head.offset;
     var pixels = dtPixels;
+    late double angle;
 
     do {
-      (newOffset, pixels) = currentRail.moveForward(newOffset, pixels);
+      (newOffset, pixels, angle) = currentRail.moveForward(newOffset, pixels);
 
       if (pixels > 0) {
         currentRail = currentRail.nextOrCreate();
@@ -59,7 +61,8 @@ class Train {
 
     head
       ..rail = currentRail
-      ..offset = newOffset;
+      ..offset = newOffset
+      ..angle = angle;
 
     for (final car in cars) {
       if (!car.isActive && car.rail == currentRail) break;
@@ -67,7 +70,7 @@ class Train {
       pixels = currentRail.cell.rect.width; // TODO(manu): with train car size
 
       do {
-        (newOffset, pixels) = currentRail.rewind(newOffset, pixels);
+        (newOffset, pixels, angle) = currentRail.rewind(newOffset, pixels);
 
         if (pixels > 0) {
           final previousRail = currentRail.previous;
@@ -91,7 +94,8 @@ class Train {
 
       car
         ..rail = currentRail
-        ..offset = newOffset;
+        ..offset = newOffset
+        ..angle = angle;
 
       if (callOnNewDisplayedCar) {
         onNewDisplayedCar(car);

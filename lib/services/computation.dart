@@ -3,7 +3,7 @@ import 'dart:ui';
 
 import 'package:bullet_train/models/models.dart';
 
-(Offset, double) linearForward(
+(Offset offset, double pixels, double angle) linearForward(
   Offset offset,
   double pixels,
   Direction direction,
@@ -11,6 +11,7 @@ import 'package:bullet_train/models/models.dart';
 ) {
   late double overflowPixels;
   late Offset newOffset;
+  late double angle;
 
   switch (direction) {
     case Direction.horizontal:
@@ -21,6 +22,7 @@ import 'package:bullet_train/models/models.dart';
         );
         overflowPixels =
             (offset.dx + pixels - rect.right).clamp(0, double.infinity);
+        angle = 0;
       } else {
         newOffset = Offset(
           (offset.dx + pixels).clamp(rect.left, rect.right),
@@ -28,8 +30,13 @@ import 'package:bullet_train/models/models.dart';
         );
         overflowPixels =
             (rect.left - (offset.dx + pixels)).clamp(0, double.infinity);
+        angle = math.pi;
       }
-      return (newOffset, overflowPixels);
+      return (
+        newOffset,
+        overflowPixels,
+        angle,
+      );
     case Direction.vertical:
       if (pixels > 0) {
         newOffset = Offset(
@@ -38,6 +45,7 @@ import 'package:bullet_train/models/models.dart';
         );
         overflowPixels =
             (offset.dy + pixels - rect.bottom).clamp(0, double.infinity);
+        angle = math.pi / 2;
       } else {
         newOffset = Offset(
           offset.dx,
@@ -45,13 +53,14 @@ import 'package:bullet_train/models/models.dart';
         );
         overflowPixels =
             (rect.top - (offset.dy + pixels)).clamp(0, double.infinity);
+        angle = -math.pi / 2;
       }
 
-      return (newOffset, overflowPixels);
+      return (newOffset, overflowPixels, angle);
   }
 }
 
-(Offset, double) circleForward(
+(Offset offset, double pixels, double angle) circleForward(
   Offset offset,
   double pixels,
   CircularDirection direction,
@@ -94,7 +103,11 @@ import 'package:bullet_train/models/models.dart';
           computeNewAngle(localOffset, complementAngle: true);
 
       if (overflowPixels > 0) {
-        return (rect.topCenter, overflowPixels);
+        return (
+          rect.topCenter,
+          overflowPixels,
+          math.pi / 2,
+        );
       }
 
       return (
@@ -102,7 +115,8 @@ import 'package:bullet_train/models/models.dart';
           math.cos(newAngle) * radius,
           math.sin(newAngle) * radius,
         ),
-        0
+        0,
+        -math.pi / 2 + newAngle,
       );
 
     case CircularDirection.leftBottom:
@@ -112,7 +126,11 @@ import 'package:bullet_train/models/models.dart';
           computeNewAngle(localOffset, complementAngle: true);
 
       if (overflowPixels > 0) {
-        return (rect.bottomCenter, overflowPixels);
+        return (
+          rect.bottomCenter,
+          overflowPixels,
+          -math.pi / 2,
+        );
       }
 
       return (
@@ -120,7 +138,8 @@ import 'package:bullet_train/models/models.dart';
           math.cos(newAngle) * radius,
           -math.sin(newAngle) * radius,
         ),
-        0
+        0,
+        math.pi / 2 - newAngle,
       );
 
     case CircularDirection.topLeft:
@@ -129,7 +148,11 @@ import 'package:bullet_train/models/models.dart';
           computeNewAngle(localOffset, complementAngle: false);
 
       if (overflowPixels > 0) {
-        return (rect.centerLeft, overflowPixels);
+        return (
+          rect.centerLeft,
+          overflowPixels,
+          math.pi,
+        );
       }
 
       return (
@@ -137,7 +160,8 @@ import 'package:bullet_train/models/models.dart';
           math.cos(newAngle) * radius,
           math.sin(newAngle) * radius,
         ),
-        0
+        0,
+        math.pi / 2 + newAngle,
       );
 
     case CircularDirection.topRight:
@@ -146,7 +170,11 @@ import 'package:bullet_train/models/models.dart';
           computeNewAngle(localOffset, complementAngle: false);
 
       if (overflowPixels > 0) {
-        return (rect.centerRight, overflowPixels);
+        return (
+          rect.centerRight,
+          overflowPixels,
+          0,
+        );
       }
 
       return (
@@ -154,7 +182,8 @@ import 'package:bullet_train/models/models.dart';
           -math.cos(newAngle) * radius,
           math.sin(newAngle) * radius,
         ),
-        0
+        0,
+        math.pi / 2 - newAngle,
       );
 
     case CircularDirection.rightTop:
@@ -163,7 +192,11 @@ import 'package:bullet_train/models/models.dart';
           computeNewAngle(localOffset, complementAngle: true);
 
       if (overflowPixels > 0) {
-        return (rect.topCenter, overflowPixels);
+        return (
+          rect.topCenter,
+          overflowPixels,
+          math.pi / 2,
+        );
       }
 
       return (
@@ -171,8 +204,10 @@ import 'package:bullet_train/models/models.dart';
           -math.cos(newAngle) * radius,
           math.sin(newAngle) * radius,
         ),
-        0
+        0,
+        -math.pi / 2 - newAngle,
       );
+
     case CircularDirection.rightBottom:
       final localOffset =
           Offset(rect.right - offset.dx, rect.bottom - offset.dy);
@@ -180,7 +215,11 @@ import 'package:bullet_train/models/models.dart';
           computeNewAngle(localOffset, complementAngle: true);
 
       if (overflowPixels > 0) {
-        return (rect.bottomCenter, overflowPixels);
+        return (
+          rect.bottomCenter,
+          overflowPixels,
+          -math.pi / 2,
+        );
       }
 
       return (
@@ -188,8 +227,10 @@ import 'package:bullet_train/models/models.dart';
           -math.cos(newAngle) * radius,
           -math.sin(newAngle) * radius,
         ),
-        0
+        0,
+        math.pi / 2 + newAngle,
       );
+
     case CircularDirection.bottomLeft:
       final localOffset =
           Offset(offset.dx - rect.left, rect.bottom - offset.dy);
@@ -197,7 +238,11 @@ import 'package:bullet_train/models/models.dart';
           computeNewAngle(localOffset, complementAngle: false);
 
       if (overflowPixels > 0) {
-        return (rect.centerLeft, overflowPixels);
+        return (
+          rect.centerLeft,
+          overflowPixels,
+          math.pi,
+        );
       }
 
       return (
@@ -205,8 +250,10 @@ import 'package:bullet_train/models/models.dart';
           math.cos(newAngle) * radius,
           -math.sin(newAngle) * radius,
         ),
-        0
+        0,
+        -math.pi / 2 - newAngle,
       );
+
     case CircularDirection.bottomRight:
       final localOffset =
           Offset(rect.right - offset.dx, rect.bottom - offset.dy);
@@ -214,7 +261,11 @@ import 'package:bullet_train/models/models.dart';
           computeNewAngle(localOffset, complementAngle: false);
 
       if (overflowPixels > 0) {
-        return (rect.centerRight, overflowPixels);
+        return (
+          rect.centerRight,
+          overflowPixels,
+          0,
+        );
       }
 
       return (
@@ -222,7 +273,8 @@ import 'package:bullet_train/models/models.dart';
           -math.cos(newAngle) * radius,
           -math.sin(newAngle) * radius,
         ),
-        0
+        0,
+        -math.pi / 2 + newAngle,
       );
   }
 }

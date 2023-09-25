@@ -41,24 +41,20 @@ class World {
 
   final _random = Random(DateTime.now().millisecondsSinceEpoch);
 
+  late final Set<Cell> _allOffsets = _generateOffsets();
+
   void addPassengerIfNeeded({
     required int trainSize,
     required void Function(Passenger passenger) onPassengerAdded,
   }) {
     if (!_passengers.any((p) => p.type == PassengerType.hero)) {
-      final allOffsets = <Cell>{};
-      for (var x = 0; x < gridSize.width; x++) {
-        for (var y = 0; y < gridSize.height; y++) {
-          allOffsets.add(_matrix.getCell(x, y));
-        }
-      }
       final cars = Set<Cell>.from(
         train.bodies.map((body) => body.rail.cell),
       );
       final psngrCells = Set<Cell>.from(_passengers.map((p) => p.cell));
 
       final availableOffsets =
-          allOffsets.difference(cars).difference(psngrCells);
+          _allOffsets.difference(cars).difference(psngrCells);
 
       if (availableOffsets.isEmpty) return;
 
@@ -73,6 +69,8 @@ class World {
       _passengers.add(hero);
       onPassengerAdded(hero);
 
+      if (availableOffsets.isEmpty) return;
+
       // Vilains
       final vilains = _passengers.where((p) => p.type == PassengerType.vilain);
 
@@ -80,19 +78,32 @@ class World {
         final vilainCell = availableOffsets.toList(
           growable: false,
         )[_random.nextInt(availableOffsets.length)];
-
-        availableOffsets.remove(vilainCell);
-
         final vilain = Passenger(
           type: PassengerType.vilain,
           cell: vilainCell,
         );
 
+        availableOffsets.remove(vilainCell);
+
         _passengers.add(vilain);
         onPassengerAdded(vilain);
+
+        if (availableOffsets.isEmpty) return;
       }
     }
   }
 
   void removePassenger(Passenger passenger) => _passengers.remove(passenger);
+
+  Set<Cell> _generateOffsets() {
+    final result = <Cell>{};
+
+    for (var x = 0; x < gridSize.width; x++) {
+      for (var y = 0; y < gridSize.height; y++) {
+        result.add(_matrix.getCell(x, y));
+      }
+    }
+
+    return result;
+  }
 }

@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:math' as math;
 
 import 'package:bullet_train/models/foundation/foundation.dart';
 import 'package:bullet_train/services/services.dart';
@@ -32,11 +33,20 @@ final class Rail extends LinkedListEntry<Rail> {
 
   Offset get center => cell.rect.center;
 
-  (Offset, double) moveForward(Offset offset, double pixels) =>
+  (Offset offset, double pixels, double angle) moveForward(
+    Offset offset,
+    double pixels,
+  ) =>
       _move(offset, pixels, RailMoveDirection.forward);
 
-  (Offset, double) rewind(Offset offset, double pixels) =>
-      _move(offset, pixels, RailMoveDirection.backward);
+  (Offset offset, double pixels, double angle) rewind(
+    Offset offset,
+    double pixels,
+  ) {
+    final result = _move(offset, pixels, RailMoveDirection.backward);
+
+    return (result.$1, result.$2, result.$3 + math.pi);
+  }
 
   void moveNextTo(Position position) {
     final nextRail = nextOrCreate();
@@ -105,12 +115,12 @@ final class Rail extends LinkedListEntry<Rail> {
     throw BadDirectionError();
   }
 
-  (Offset, double) _move(
+  (Offset offset, double pixels, double angle) _move(
     Offset offset,
     double pixels,
     RailMoveDirection direction,
   ) {
-    if (pixels == 0) return (offset, 0);
+    if (pixels == 0) return (offset, 0, 0);
 
     final rect = cell.rect;
     final (from, to) = switch (direction) {

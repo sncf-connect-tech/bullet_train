@@ -1,31 +1,40 @@
 import 'dart:async';
-import 'dart:math' as math;
-import 'dart:ui';
 
 import 'package:bullet_train/game/game.dart';
 import 'package:bullet_train/models/models.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
+import 'package:flutter/material.dart';
 
 class TrainComponent extends PositionComponent
     with HasGameRef<BulletTrain>, CollisionCallbacks {
   TrainComponent({required this.trainBody})
-      : super(priority: GameLayer.train.priority);
+      : super(
+          priority: GameLayer.train.priority,
+          anchor: Anchor.center,
+        );
 
   final TrainBody trainBody;
 
   @override
   FutureOr<void> onLoad() {
+    size = Vector2(
+      gameRef.size.x / gameRef.world.gridSize.width,
+      gameRef.size.y / gameRef.world.gridSize.height,
+    );
+
     final paint = Paint()
       ..color = trainBody.isHead
           ? gameRef.theme.snakeHeadColor
           : gameRef.theme.snakeBodyColor;
 
+    final trainSizeFactor = game.theme.trainSizeFactor;
+
     add(
-      CircleHitbox(
-        radius: _trainRadius,
-        anchor: Anchor.center,
+      RectangleHitbox.relative(
+        Vector2(trainSizeFactor, trainSizeFactor / 2),
+        parentSize: size,
         isSolid: true,
       )
         ..paint = paint
@@ -48,7 +57,7 @@ class TrainComponent extends PositionComponent
     super.onCollisionStart(intersectionPoints, other);
 
     if (other is ScreenHitbox) {
-      // gameRef.over();
+      gameRef.over();
     } else if (other is TrainComponent) {
       gameRef.over();
     } else if (other is PassengerComponent) {
@@ -68,7 +77,10 @@ class TrainComponent extends PositionComponent
   void onGameResize(Vector2 size) {
     _updatePosition();
 
-    children.whereType<CircleHitbox>().single.radius = _trainRadius;
+    scale = Vector2(
+      size.x / gameRef.world.gridSize.width / this.size.x,
+      size.y / gameRef.world.gridSize.height / this.size.y,
+    );
 
     super.onGameResize(size);
   }
@@ -80,14 +92,11 @@ class TrainComponent extends PositionComponent
       position = trainBody.rail.cell
           .getOffsetFromScreenSize(offset, gameRef.size.toSize())
           .toVector2();
-    }
-  }
 
-  double get _trainRadius {
-    final trainSizeFactor = game.theme.trainSizeFactor;
-    return math.min(
-      game.size.x / game.theme.gridSize.width / 2 * trainSizeFactor,
-      game.size.y / game.theme.gridSize.height / 2 * trainSizeFactor,
-    );
+      final newAngle = trainBody.angle;
+      if (newAngle != null) {
+        angle = newAngle;
+      }
+    }
   }
 }

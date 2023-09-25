@@ -7,10 +7,12 @@ sealed class TrainBody extends LinkedListEntry<TrainBody> {
   TrainBody({
     required this.rail,
     required this.offset,
+    required this.angle,
   });
 
   Rail rail;
   Offset? offset;
+  double? angle;
 
   bool get isHead;
 
@@ -18,7 +20,7 @@ sealed class TrainBody extends LinkedListEntry<TrainBody> {
 }
 
 base class TrainHead extends TrainBody {
-  TrainHead({required super.rail, required super.offset});
+  TrainHead({required super.rail, required super.offset, required super.angle});
 
   @override
   Offset get offset => super.offset!;
@@ -28,7 +30,7 @@ base class TrainHead extends TrainBody {
 }
 
 base class TrainCar extends TrainBody {
-  TrainCar({required super.rail}) : super(offset: null);
+  TrainCar({required super.rail}) : super(offset: null, angle: null);
 
   @override
   bool get isHead => false;
