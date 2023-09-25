@@ -7,16 +7,17 @@ import 'package:flame/game.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-// ignore: deprecated_member_use
+
 class BulletTrain extends FlameGame
     with HasKeyboardHandlerComponents, HasCollisionDetection {
   BulletTrain({
     required this.effectPlayer,
-    required this.theme,
-  });
+    GameTheme? theme,
+  }) : theme = theme ?? GameTheme.defaultGameTheme;
 
   final AudioPlayer effectPlayer;
   final GameTheme theme;
+
   late final World world;
 
   var _gameOver = false;

@@ -31,6 +31,7 @@ class GameView extends StatefulWidget {
   const GameView({super.key, this.game});
 
   final FlameGame? game;
+
   @override
   State<GameView> createState() => _GameViewState();
 }
@@ -55,18 +56,20 @@ class _GameViewState extends State<GameView> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final gameTheme = Theme.of(context).extension<GameTheme>()
+        ?? GameTheme.defaultGameTheme;
+
     _game ??= widget.game ??
         BulletTrain(
           effectPlayer: context.read<AudioCubit>().effectPlayer,
-          theme: theme.game,
+          theme: gameTheme,
         );
     return Stack(
       children: [
         Positioned.fill(
           child: Center(
             child: AspectRatio(
-              aspectRatio: theme.game.gridAspectRatio,
+              aspectRatio: gameTheme.gridAspectRatio,
               child: GameWidget(game: _game!),
             ),
           ),

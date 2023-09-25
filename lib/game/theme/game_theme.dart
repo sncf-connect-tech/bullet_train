@@ -39,6 +39,21 @@ class GameTheme extends ThemeExtension<GameTheme> {
 
   double get gridAspectRatio => gridSize.width / gridSize.height;
 
+  static GameTheme defaultGameTheme = GameTheme(
+    backgroundColor: Colors.grey,
+    snakeHeadColor: Colors.lightBlueAccent,
+    snakeBodyColor: Colors.blueAccent,
+    wallsColor: Colors.green,
+    cellOddColor: Colors.blueGrey,
+    cellEvenColor: Colors.yellow,
+    gridSize: (width: 17, height: 33),
+    speedInCellsPerSecond: 2,
+    passengerHeroColor: Colors.green,
+    passengerVilainColor: Colors.red,
+    passengerSizeFactor: 0.5,
+    trainSizeFactor: 0.7,
+  );
+
   @override
   ThemeExtension<GameTheme> copyWith({
     Color? backgroundColor,

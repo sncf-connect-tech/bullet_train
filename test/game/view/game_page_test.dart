@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
@@ -73,7 +71,7 @@ void main() {
 
     setUp(() {
       audioCubit = _MockAudioCubit();
-      when(() => audioCubit.state).thenReturn(AudioState());
+      when(() => audioCubit.state).thenReturn(const AudioState());
 
       final effectPlayer = _MockAudioPlayer();
       when(() => audioCubit.effectPlayer).thenReturn(effectPlayer);
@@ -85,7 +83,11 @@ void main() {
 
     testWidgets('toggles mute button correctly', (tester) async {
       final controller = StreamController<AudioState>();
-      whenListen(audioCubit, controller.stream, initialState: AudioState());
+      whenListen(
+        audioCubit,
+        controller.stream,
+        initialState: const AudioState(),
+      );
 
       final game = TestGame();
       await tester.pumpApp(
@@ -97,12 +99,12 @@ void main() {
 
       expect(find.byIcon(Icons.volume_up), findsOneWidget);
 
-      controller.add(AudioState(volume: 0));
+      controller.add(const AudioState(volume: 0));
       await tester.pump();
 
       expect(find.byIcon(Icons.volume_off), findsOneWidget);
 
-      controller.add(AudioState());
+      controller.add(const AudioState());
       await tester.pump();
 
       expect(find.byIcon(Icons.volume_up), findsOneWidget);
@@ -111,7 +113,11 @@ void main() {
     testWidgets('calls correct method based on state', (tester) async {
       final controller = StreamController<AudioState>();
       when(audioCubit.toggleVolume).thenAnswer((_) async {});
-      whenListen(audioCubit, controller.stream, initialState: AudioState());
+      whenListen(
+        audioCubit,
+        controller.stream,
+        initialState: const AudioState(),
+      );
 
       final game = TestGame();
       await tester.pumpApp(
@@ -122,12 +128,12 @@ void main() {
       );
 
       await tester.tap(find.byIcon(Icons.volume_up));
-      controller.add(AudioState(volume: 0));
+      controller.add(const AudioState(volume: 0));
       await tester.pump();
       verify(audioCubit.toggleVolume).called(1);
 
       await tester.tap(find.byIcon(Icons.volume_off));
-      controller.add(AudioState());
+      controller.add(const AudioState());
       await tester.pump();
       verify(audioCubit.toggleVolume).called(1);
     });
