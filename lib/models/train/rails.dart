@@ -33,10 +33,10 @@ final class Rail extends LinkedListEntry<Rail> {
   Offset get center => cell.rect.center;
 
   (Offset, double) moveForward(Offset offset, double pixels) =>
-      _move(offset, pixels, _MoveDirection.forward);
+      _move(offset, pixels, RailMoveDirection.forward);
 
   (Offset, double) rewind(Offset offset, double pixels) =>
-      _move(offset, pixels, _MoveDirection.backward);
+      _move(offset, pixels, RailMoveDirection.backward);
 
   void moveNextTo(Position position) {
     final nextRail = nextOrCreate();
@@ -108,14 +108,14 @@ final class Rail extends LinkedListEntry<Rail> {
   (Offset, double) _move(
     Offset offset,
     double pixels,
-    _MoveDirection direction,
+    RailMoveDirection direction,
   ) {
     if (pixels == 0) return (offset, 0);
 
     final rect = cell.rect;
     final (from, to) = switch (direction) {
-      _MoveDirection.backward => (_to, _from),
-      _MoveDirection.forward => (_from, _to)
+      RailMoveDirection.backward => (_to, _from),
+      RailMoveDirection.forward => (_from, _to)
     };
 
     switch (from) {
@@ -214,7 +214,7 @@ class BadDirectionError extends UnsupportedError {
   BadDirectionError() : super('Bad direction');
 }
 
-enum _MoveDirection { backward, forward }
+enum RailMoveDirection { backward, forward }
 
 extension ToRailsExtensions on Cell {
   Rail toRail(Position from, Position to) => Rail(

@@ -48,7 +48,7 @@ class TrainComponent extends PositionComponent
     super.onCollisionStart(intersectionPoints, other);
 
     if (other is ScreenHitbox) {
-      gameRef.over();
+      // gameRef.over();
     } else if (other is TrainComponent) {
       gameRef.over();
     } else if (other is PassengerComponent) {

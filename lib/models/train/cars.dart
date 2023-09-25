@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:ui';
 
 import 'package:bullet_train/models/foundation/foundation.dart';
 import 'package:bullet_train/models/train/train.dart';
@@ -10,7 +11,7 @@ class Train {
     _rails.addRail(rail);
     _bodies.add(TrainHead(rail: rail, offset: rail.center));
 
-    for (var i = 0; i < 8; i++) {
+    for (var i = 0; i < 4; i++) {
       addCar();
     }
   }
@@ -48,6 +49,11 @@ class Train {
 
       if (pixels > 0) {
         currentRail = currentRail.nextOrCreate();
+
+        newOffset = _computeOffsetFromPosition(
+          currentRail,
+          RailMoveDirection.forward,
+        );
       }
     } while (pixels > 0);
 
@@ -69,8 +75,17 @@ class Train {
           if (previousRail == null) break;
 
           currentRail = previousRail;
+
+          newOffset = _computeOffsetFromPosition(
+            currentRail,
+            RailMoveDirection.backward,
+          );
         }
       } while (pixels > 0);
+
+      final lastRail = cars.last.rail.previous;
+
+      if (lastRail != null) lastRail.list!.remove(lastRail);
 
       final callOnNewDisplayedCar = !car.isActive;
 
@@ -82,5 +97,23 @@ class Train {
         onNewDisplayedCar(car);
       }
     }
+  }
+
+  Offset _computeOffsetFromPosition(
+    Rail currentRail,
+    RailMoveDirection moveDirection,
+  ) {
+    final position = switch (moveDirection) {
+      RailMoveDirection.forward => currentRail.from,
+      RailMoveDirection.backward => currentRail.to,
+    };
+
+    return switch (position) {
+      Position.top => currentRail.cell.rect.topCenter,
+      Position.bottom => currentRail.cell.rect.bottomCenter,
+      Position.left => currentRail.cell.rect.centerLeft,
+      Position.right => currentRail.cell.rect.centerRight,
+      Position.unknown => currentRail.cell.rect.center,
+    };
   }
 }

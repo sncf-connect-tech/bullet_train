@@ -47,7 +47,7 @@ class AppTheme {
         wallsColor: ConnectColors.surface,
         cellOddColor: ConnectColors.surface,
         cellEvenColor: ConnectColors.popup,
-        gridSize: (width: 17, height: 33),
+        gridSize: (width: 11, height: 11),
         passengerSizeFactor: 0.5,
         trainSizeFactor: 0.7,
         speedInCellsPerSecond: 3,

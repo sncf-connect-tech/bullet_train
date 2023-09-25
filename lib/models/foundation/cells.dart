@@ -3,8 +3,6 @@
 import 'dart:collection';
 import 'dart:ui';
 
-import 'package:flutter/foundation.dart';
-
 enum CellParity {
   odd,
   even;
@@ -22,6 +20,7 @@ class CellsMatrix {
     for (var x = 0; x < _cells.length; x++) {
       for (var y = 0; y < _cells[x].length; y++) {
         final cell = getCell(x, y);
+
         if (x > 0) {
           cell._left = getCell(x - 1, y);
         }
@@ -35,6 +34,16 @@ class CellsMatrix {
           cell._down = getCell(x, y + 1);
         }
       }
+    }
+
+    for (var x = 0; x < _cells.length; x++) {
+      _cells[x][0]._up = _cells[x][_cells[x].length - 1];
+      _cells[x][_cells[x].length - 1]._down = _cells[x][0];
+    }
+
+    for (var y = 0; y < _cells[0].length; y++) {
+      _cells[0][y]._left = _cells[_cells.length - 1][y];
+      _cells[_cells.length - 1][y]._right = _cells[0][y];
     }
   }
 
@@ -83,7 +92,6 @@ class CellsMatrix {
   }
 }
 
-@immutable
 class Cell {
   Cell._({
     required this.parity,
@@ -102,15 +110,15 @@ class Cell {
         rect.height * screenSize.height / _gridSize.height,
       );
 
-  Cell? _up;
-  Cell? _down;
-  Cell? _left;
-  Cell? _right;
+  late Cell? _up;
+  late Cell? _down;
+  late Cell? _left;
+  late Cell? _right;
 
-  Cell? get up => _up;
-  Cell? get down => _down;
-  Cell? get left => _left;
-  Cell? get right => _right;
+  Cell get up => _up!;
+  Cell get down => _down!;
+  Cell get left => _left!;
+  Cell get right => _right!;
 
   Offset getOffsetFromScreenSize(Offset offset, Size screenSize) => Offset(
         offset.dx * screenSize.width / _gridSize.width,
