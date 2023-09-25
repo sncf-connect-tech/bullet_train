@@ -55,27 +55,42 @@ class World {
       final cars = Set<Cell>.from(
         train.bodies.map((body) => body.rail.cell),
       );
-      final availableOffsets = allOffsets.difference(cars).toList();
+      final psngrCells = Set<Cell>.from(_passengers.map((p) => p.cell));
+
+      final availableOffsets =
+          allOffsets.difference(cars).difference(psngrCells);
 
       if (availableOffsets.isEmpty) return;
 
-      final result = availableOffsets[_random.nextInt(availableOffsets.length)];
+      // Hero
+      final heroCell = availableOffsets.toList(
+        growable: false,
+      )[_random.nextInt(availableOffsets.length)];
+      final hero = Passenger(type: PassengerType.hero, cell: heroCell);
 
-      final passenger = Passenger(type: PassengerType.hero, cell: result);
+      availableOffsets.remove(heroCell);
 
+      _passengers.add(hero);
+      onPassengerAdded(hero);
+
+      // Vilains
       final vilains = _passengers.where((p) => p.type == PassengerType.vilain);
 
-      while (vilains.length < trainSize - 2) {
+      while (vilains.length < trainSize - 1) {
+        final vilainCell = availableOffsets.toList(
+          growable: false,
+        )[_random.nextInt(availableOffsets.length)];
+
+        availableOffsets.remove(vilainCell);
+
         final vilain = Passenger(
           type: PassengerType.vilain,
-          cell: availableOffsets[_random.nextInt(availableOffsets.length)],
+          cell: vilainCell,
         );
+
         _passengers.add(vilain);
         onPassengerAdded(vilain);
       }
-
-      _passengers.add(passenger);
-      onPassengerAdded(passenger);
     }
   }
 
