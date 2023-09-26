@@ -17,25 +17,30 @@ class TrainComponent extends PositionComponent
 
   final TrainBody trainBody;
 
+  Size get _gridSize => gameRef.world.gridSize;
+  Vector2 get _parentSize => gameRef.size;
+  GameTheme get _theme => gameRef.theme;
+
   @override
   FutureOr<void> onLoad() {
     size = Vector2(
-      gameRef.size.x / gameRef.world.gridSize.width,
-      gameRef.size.y / gameRef.world.gridSize.height,
+      _parentSize.x / _gridSize.width,
+      _parentSize.y / _gridSize.height,
     );
 
     final paint = Paint()
-      ..color = trainBody.isHead
-          ? gameRef.theme.snakeHeadColor
-          : gameRef.theme.snakeBodyColor;
+      ..color =
+          trainBody.isHead ? _theme.snakeHeadColor : _theme.snakeBodyColor;
 
-    final trainSizeFactor = game.theme.trainSizeFactor;
+    final trainSizeFactor = _theme.trainSizeFactor;
 
     add(
       RectangleHitbox.relative(
         Vector2(trainSizeFactor, trainSizeFactor / 2),
         parentSize: size,
         isSolid: true,
+        collisionType:
+            trainBody.isHead ? CollisionType.active : CollisionType.passive,
       )
         ..paint = paint
         ..renderShape = true,
@@ -76,15 +81,15 @@ class TrainComponent extends PositionComponent
   }
 
   @override
-  void onGameResize(Vector2 size) {
+  void onParentResize(Vector2 maxSize) {
     _updatePosition();
 
     scale = Vector2(
-      size.x / gameRef.world.gridSize.width / this.size.x,
-      size.y / gameRef.world.gridSize.height / this.size.y,
+      (maxSize.x / _gridSize.width) / size.x,
+      (maxSize.y / _gridSize.height) / size.y,
     );
 
-    super.onGameResize(size);
+    super.onParentResize(maxSize);
   }
 
   void _updatePosition() {

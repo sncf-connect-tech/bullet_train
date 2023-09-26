@@ -9,12 +9,15 @@ class GameBackgroundComponent extends PositionComponent
     with HasGameRef<BulletTrain> {
   GameBackgroundComponent() : super(priority: GameLayer.background.priority);
 
+  GameTheme get _theme => gameRef.theme;
+  Vector2 get _parentSize => gameRef.size;
+
   @override
   FutureOr<void> onLoad() {
     for (final cell in game.world.cells) {
       add(
         RectangleComponent.fromRect(
-          cell.getRectFromScreenSize(gameRef.size.toSize()),
+          cell.getRectFromScreenSize(_parentSize.toSize()),
           paint: _getPaintFromCellParity(cell.parity),
         ),
       );
@@ -22,7 +25,7 @@ class GameBackgroundComponent extends PositionComponent
   }
 
   @override
-  void onGameResize(Vector2 size) {
+  void onParentResize(Vector2 maxSize) {
     final cellsRendered = children.whereType<RectangleComponent>().toList();
     final cells = game.world.cells;
 
@@ -33,21 +36,20 @@ class GameBackgroundComponent extends PositionComponent
 
     for (var i = 0; i < cellsRendered.length; i++) {
       cellsRendered[i]
-          .setByRect(cells[i].getRectFromScreenSize(gameRef.size.toSize()));
+          .setByRect(cells[i].getRectFromScreenSize(_parentSize.toSize()));
     }
 
-    super.onGameResize(size);
+    super.onParentResize(maxSize);
   }
 
   Paint _getPaintFromCellParity(CellParity parity) {
-    final theme = game.theme;
     final paint = Paint();
 
     switch (parity) {
       case CellParity.odd:
-        paint.color = theme.cellOddColor;
+        paint.color = _theme.cellOddColor;
       case CellParity.even:
-        paint.color = theme.cellEvenColor;
+        paint.color = _theme.cellEvenColor;
     }
 
     return paint;

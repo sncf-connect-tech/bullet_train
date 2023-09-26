@@ -11,13 +11,13 @@ class BulletTrain extends FlameGame
     with HasKeyboardHandlerComponents, HasCollisionDetection {
   BulletTrain({
     required this.effectPlayer,
+    required this.onGameOver,
     GameTheme? theme,
-    this.onGameOver,
   }) : theme = theme ?? GameTheme.defaultGameTheme;
 
   final AudioPlayer effectPlayer;
   final GameTheme theme;
-  final VoidCallback? onGameOver;
+  final VoidCallback onGameOver;
 
   late World world;
 
@@ -76,7 +76,7 @@ class BulletTrain extends FlameGame
 
   void over() {
     _gameOver = true;
-    onGameOver?.call();
+    onGameOver();
   }
 
   @override
@@ -97,6 +97,7 @@ class BulletTrain extends FlameGame
       world.moveNextTo(Position.right);
       return KeyEventResult.handled;
     }
+    
     return super.onKeyEvent(event, keysPressed);
   }
 
