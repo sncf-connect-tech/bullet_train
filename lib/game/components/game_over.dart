@@ -57,9 +57,10 @@ class GameOver extends StatelessWidget {
                   ),
                 ],
               ),
+              const SizedBox(height: minColumnSpacing),
               Expanded(
                 child: NavigationButton(
-                  title: 'Recommencer',
+                  title: 'Rejouer',
                   onPressed: () => onPressContinue?.call(),
                 ),
               ),
