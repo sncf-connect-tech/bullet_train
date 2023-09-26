@@ -1,5 +1,6 @@
-import 'package:bullet_train/loading/loading.dart';
-import 'package:bullet_train/menu/view/menu_page.dart';
+import 'package:bullet_train/cubit/cubit.dart';
+import 'package:bullet_train/widgets/loading/loading.dart';
+import 'package:bullet_train/widgets/menu/view/menu_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

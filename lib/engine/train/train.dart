@@ -2,8 +2,11 @@ import 'dart:collection';
 import 'dart:math' as math;
 import 'dart:ui';
 
-import 'package:bullet_train/models/foundation/foundation.dart';
-import 'package:bullet_train/models/train/train.dart';
+import 'package:bullet_train/engine/foundation/foundation.dart';
+import 'package:bullet_train/engine/train/train.dart';
+
+export 'body.dart';
+export 'rails.dart';
 
 class Train {
   Train({required Cell startCell}) {

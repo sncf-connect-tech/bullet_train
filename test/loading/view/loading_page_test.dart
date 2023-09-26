@@ -4,8 +4,9 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:audioplayers/audioplayers.dart';
+import 'package:bullet_train/cubit/cubit.dart';
 import 'package:bullet_train/gen/assets.gen.dart';
-import 'package:bullet_train/loading/loading.dart';
+import 'package:bullet_train/widgets/loading/loading.dart';
 import 'package:flame/cache.dart';
 import 'package:flutter/widgets.dart' hide Image;
 import 'package:flutter_test/flutter_test.dart';

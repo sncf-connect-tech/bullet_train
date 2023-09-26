@@ -1,5 +1,6 @@
+import 'package:bullet_train/cubit/cubit.dart';
 import 'package:bullet_train/game/game.dart';
-import 'package:bullet_train/loading/cubit/cubit.dart';
+import 'package:bullet_train/theme/theme.dart';
 import 'package:flame/game.dart' hide Route;
 import 'package:flame_audio/bgm.dart';
 import 'package:flutter/material.dart';

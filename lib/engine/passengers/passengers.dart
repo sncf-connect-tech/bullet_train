@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:bullet_train/models/foundation/foundation.dart';
+import 'package:bullet_train/engine/foundation/foundation.dart';
 
 enum PassengerType {
   vilain,

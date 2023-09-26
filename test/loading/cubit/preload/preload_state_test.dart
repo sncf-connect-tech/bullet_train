@@ -1,4 +1,4 @@
-import 'package:bullet_train/loading/loading.dart';
+import 'package:bullet_train/cubit/cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

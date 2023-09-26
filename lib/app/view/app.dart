@@ -1,6 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
-import 'package:bullet_train/game/theme/app_theme.dart';
-import 'package:bullet_train/loading/loading.dart';
+import 'package:bullet_train/cubit/cubit.dart';
+import 'package:bullet_train/theme/app_theme.dart';
+import 'package:bullet_train/widgets/loading/loading.dart';
 import 'package:flame/cache.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

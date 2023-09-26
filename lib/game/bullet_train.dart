@@ -1,6 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:bullet_train/engine/engine.dart';
 import 'package:bullet_train/game/game.dart';
-import 'package:bullet_train/models/models.dart';
+import 'package:bullet_train/theme/theme.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
@@ -97,7 +98,7 @@ class BulletTrain extends FlameGame
       world.moveNextTo(Position.right);
       return KeyEventResult.handled;
     }
-    
+
     return super.onKeyEvent(event, keysPressed);
   }
 

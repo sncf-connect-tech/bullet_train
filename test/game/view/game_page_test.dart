@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:bullet_train/cubit/cubit.dart';
 import 'package:bullet_train/game/game.dart';
-import 'package:bullet_train/loading/cubit/cubit.dart';
 import 'package:flame_audio/bgm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

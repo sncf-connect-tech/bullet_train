@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:bullet_train/models/models.dart';
+import 'package:bullet_train/engine/engine.dart';
 import 'package:flutter/material.dart';
 
 class GameTheme extends ThemeExtension<GameTheme> {

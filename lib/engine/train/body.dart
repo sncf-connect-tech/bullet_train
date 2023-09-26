@@ -1,7 +1,7 @@
 import 'dart:collection';
 import 'dart:ui';
 
-import 'package:bullet_train/models/train/train.dart';
+import 'package:bullet_train/engine/train/train.dart';
 
 sealed class TrainBody extends LinkedListEntry<TrainBody> {
   TrainBody({

@@ -13,7 +13,8 @@ class ScoreDisplay extends StatelessWidget {
     return ValueListenableBuilder(
       valueListenable: (game as BulletTrain).score,
       builder: (context, score, _) {
-        return Text('SCORE : $score',
+        return Text(
+          'SCORE : $score',
           style: const TextStyle(
             color: ConnectColors.primaryDark,
             fontWeight: FontWeight.bold,

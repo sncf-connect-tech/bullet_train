@@ -1,4 +1,3 @@
-
 class Dimens {
   static const rowSpacing = 32.0;
 

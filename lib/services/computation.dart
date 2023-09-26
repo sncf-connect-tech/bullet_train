@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 import 'dart:ui';
 
-import 'package:bullet_train/models/models.dart';
+import 'package:bullet_train/engine/engine.dart';
 
 (Offset offset, double pixels, double angle) linearForward(
   Offset offset,
