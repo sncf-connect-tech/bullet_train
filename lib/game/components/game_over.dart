@@ -1,9 +1,6 @@
 import 'dart:ui';
 
-import 'package:bullet_train/design/colors.dart';
-import 'package:bullet_train/design/components/navigation_button.dart';
-import 'package:bullet_train/design/components/neon_effect.dart';
-import 'package:bullet_train/design/dimens.dart';
+import 'package:bullet_train/design/design.dart';
 import 'package:flutter/material.dart';
 
 class GameOver extends StatelessWidget {
@@ -24,7 +21,10 @@ class GameOver extends StatelessWidget {
       child: Stack(
         children: [
           BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: blurSigma, sigmaY: blurSigma),
+            filter: ImageFilter.blur(
+              sigmaX: Dimens.blurSigma,
+              sigmaY: Dimens.blurSigma,
+            ),
             child: Container(color: Colors.transparent),
           ),
           Column(
@@ -57,14 +57,14 @@ class GameOver extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: minColumnSpacing),
+              const SizedBox(height: Dimens.minColumnSpacing),
               Expanded(
                 child: NavigationButton(
                   title: 'Rejouer',
                   onPressed: () => onPressContinue?.call(),
                 ),
               ),
-              const SizedBox(height: minColumnSpacing),
+              const SizedBox(height: Dimens.minColumnSpacing),
               Expanded(
                 child: NavigationButton(
                   title: "Retour à l'écran titre",

@@ -1,7 +1,9 @@
 
-const rowSpacing = 32.0;
+class Dimens {
+  static const rowSpacing = 32.0;
 
-const columnSpacing = 32.0;
-const minColumnSpacing = 16.0;
+  static const columnSpacing = 32.0;
+  static const minColumnSpacing = 16.0;
 
-const blurSigma = 8.0;
+  static const blurSigma = 8.0;
+}

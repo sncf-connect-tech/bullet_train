@@ -1,5 +1,3 @@
-import 'package:bullet_train/game/components/game_over.dart';
-import 'package:bullet_train/game/components/score_display.dart';
 import 'package:bullet_train/game/game.dart';
 import 'package:bullet_train/loading/cubit/cubit.dart';
 import 'package:flame/game.dart' hide Route;

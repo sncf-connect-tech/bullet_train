@@ -1,7 +1,4 @@
-import 'package:bullet_train/design/colors.dart';
-import 'package:bullet_train/design/components/navigation_button.dart';
-import 'package:bullet_train/design/components/neon_effect.dart';
-import 'package:bullet_train/design/dimens.dart';
+import 'package:bullet_train/design/design.dart';
 import 'package:bullet_train/game/game.dart';
 import 'package:bullet_train/gen/assets.gen.dart';
 import 'package:bullet_train/menu/components/menu_title.dart';
@@ -30,7 +27,7 @@ class MenuView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: rowSpacing),
+      padding: const EdgeInsets.symmetric(horizontal: Dimens.rowSpacing),
       child: Center(
         child: Column(
           children: [
@@ -53,25 +50,25 @@ class MenuView extends StatelessWidget {
                             title: 'Démarrer',
                           ),
                         ),
-                        const SizedBox(height: columnSpacing),
+                        const SizedBox(height: Dimens.columnSpacing),
                         Expanded(
                           child: NavigationButton(
                             onPressed: () {/* TODO: ScorePage */},
                             title: 'Score',
                           ),
                         ),
-                        const SizedBox(height: columnSpacing),
+                        const SizedBox(height: Dimens.columnSpacing),
                         Expanded(
                           child: NavigationButton(
                             onPressed: () {/* TODO: AboutPage */},
                             title: 'À propos',
                           ),
                         ),
-                        const SizedBox(height: columnSpacing),
+                        const SizedBox(height: Dimens.columnSpacing),
                       ],
                     ),
                   ),
-                  const SizedBox(width: rowSpacing),
+                  const SizedBox(width: Dimens.rowSpacing),
                   NeonEffect(
                     color: ConnectColors.error,
                     child: Assets.images.bulletTrainCharacters.image(),
