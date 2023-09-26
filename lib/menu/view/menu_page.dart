@@ -38,6 +38,7 @@ class MenuView extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(

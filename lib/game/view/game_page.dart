@@ -105,6 +105,7 @@ class _GameViewState extends State<GameView> {
                   setState(() {
                     _gameOver = false;
                   });
+                  // TODO: peut-être un truc plus efficient qu'un pop and push
                   Navigator.of(context).pop();
                   Navigator.of(context).push(GamePage.route());
                 },
