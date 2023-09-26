@@ -1,4 +1,5 @@
 import 'package:bullet_train/game/components/game_over.dart';
+import 'package:bullet_train/game/components/score_display.dart';
 import 'package:bullet_train/game/game.dart';
 import 'package:bullet_train/loading/cubit/cubit.dart';
 import 'package:flame/game.dart' hide Route;
@@ -69,7 +70,7 @@ class _GameViewState extends State<GameView> {
             setState(() {
               _gameOver = true;
             });
-          }
+          },
         );
     return Stack(
       children: [
@@ -80,6 +81,11 @@ class _GameViewState extends State<GameView> {
               child: GameWidget(game: _game!),
             ),
           ),
+        ),
+        Positioned(
+          top: 30,
+          left: 30,
+          child: ScoreDisplay(game: _game!),
         ),
         Align(
           alignment: Alignment.topRight,

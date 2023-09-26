@@ -66,8 +66,10 @@ class TrainComponent extends PositionComponent
 
       switch (other.passenger.type) {
         case PassengerType.hero:
+          gameRef.world.onScoreIncrease();
           gameRef.world.addTrainCar();
         case PassengerType.vilain:
+          gameRef.world.onScoreDecrease();
           gameRef.world.removeTrainCar();
       }
     }

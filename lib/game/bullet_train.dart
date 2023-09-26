@@ -23,13 +23,18 @@ class BulletTrain extends FlameGame
 
   var _gameOver = false;
   final _paused = false;
+  ValueNotifier<int> score = ValueNotifier(0);
 
   @override
   Color backgroundColor() => theme.backgroundColor;
 
   @override
   Future<void> onLoad() async {
-    world = World(gridSize: theme.gridSize);
+    world = World(
+      gridSize: theme.gridSize,
+      onScoreIncrease: increaseScore,
+      onScoreDecrease: decreaseScore,
+    );
 
     await addAll([
       GameBackgroundComponent(),
@@ -93,5 +98,13 @@ class BulletTrain extends FlameGame
       return KeyEventResult.handled;
     }
     return super.onKeyEvent(event, keysPressed);
+  }
+
+  void increaseScore() {
+    score.value++;
+  }
+
+  void decreaseScore() {
+    score.value--;
   }
 }
