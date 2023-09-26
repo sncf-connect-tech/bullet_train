@@ -25,7 +25,7 @@ void main() {
         setUp: () {
           images = _MockImages();
           when(
-            () => images.loadAll([Assets.images.unicornAnimation.path]),
+            () => images.loadAll([Assets.images.bulletTrainCharacters.path]),
           ).thenAnswer((invocation) => Future.value(<Image>[]));
 
           audio = _MockAudioCache();
@@ -66,7 +66,7 @@ void main() {
             () => audio.loadAll([Assets.audio.background, Assets.audio.effect]),
           ).called(1);
           verify(
-            () => images.loadAll([Assets.images.unicornAnimation.path]),
+            () => images.loadAll([Assets.images.bulletTrainCharacters.path]),
           ).called(1);
         },
       );

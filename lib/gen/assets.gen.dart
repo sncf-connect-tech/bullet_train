@@ -29,12 +29,8 @@ class $AssetsImagesGen {
   AssetGenImage get bulletTrainCharacters =>
       const AssetGenImage('assets/images/bullet_train_characters.png');
 
-  /// File path: assets/images/unicorn_animation.png
-  AssetGenImage get unicornAnimation =>
-      const AssetGenImage('assets/images/unicorn_animation.png');
-
   /// List of all assets
-  List<AssetGenImage> get values => [bulletTrainCharacters, unicornAnimation];
+  List<AssetGenImage> get values => [bulletTrainCharacters];
 }
 
 class $AssetsLicensesGen {
