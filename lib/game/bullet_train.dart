@@ -55,7 +55,7 @@ class BulletTrain extends FlameGame
   void update(double dt) {
     super.update(dt);
 
-    if (world.train.bodies.isEmpty) {
+    if (engineWorld.train.bodies.isEmpty) {
       over();
     }
 

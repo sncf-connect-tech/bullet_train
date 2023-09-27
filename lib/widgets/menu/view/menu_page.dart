@@ -4,7 +4,6 @@ import 'package:bullet_train/design/design.dart';
 import 'package:bullet_train/game/game.dart';
 import 'package:bullet_train/gen/assets.gen.dart';
 import 'package:bullet_train/shared/difficulty.dart';
-import 'package:bullet_train/theme/theme.dart';
 import 'package:bullet_train/widgets/menu/components/difficulty_selector.dart';
 import 'package:bullet_train/widgets/menu/components/menu_title.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +33,7 @@ class MenuView extends StatefulWidget {
 }
 
 class _MenuViewState extends State<MenuView> {
-  late Difficulty difficulty;
+  Difficulty difficulty = Difficulty.medium;
   bool isVisible = false;
 
   @override
@@ -50,8 +49,6 @@ class _MenuViewState extends State<MenuView> {
 
   @override
   Widget build(BuildContext context) {
-    difficulty = Theme.of(context).game.initialDifficulty;
-
     return AnimatedOpacity(
       opacity: isVisible ? 1 : 0,
       duration: const Duration(milliseconds: 500),

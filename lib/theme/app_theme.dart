@@ -1,5 +1,4 @@
 import 'package:bullet_train/design/colors.dart';
-import 'package:bullet_train/shared/difficulty.dart';
 import 'package:bullet_train/theme/game_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -56,7 +55,6 @@ class AppTheme {
         trainSizeFactor: 0.7,
         speedInCellsPerSecond: 3,
         initialNumberOfCars: 0,
-        initialDifficulty: Difficulty.medium,
       ),
     ],
     textTheme: GoogleFonts.poppinsTextTheme(),

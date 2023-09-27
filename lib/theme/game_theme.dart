@@ -19,7 +19,6 @@ class GameTheme extends ThemeExtension<GameTheme> {
     required this.trainSizeFactor,
     required this.speedInCellsPerSecond,
     required this.initialNumberOfCars,
-    required this.initialDifficulty,
   })  : assert(gridSize.width.isOdd, 'gridSize width must be odd'),
         assert(gridSize.height.isOdd, 'gridSize height must be odd');
 
@@ -43,7 +42,6 @@ class GameTheme extends ThemeExtension<GameTheme> {
   double get gridAspectRatio => gridSize.width / gridSize.height;
 
   final int initialNumberOfCars;
-  final Difficulty initialDifficulty;
 
   static GameTheme defaultGameTheme = GameTheme(
     backgroundColor: Colors.grey,
@@ -59,7 +57,6 @@ class GameTheme extends ThemeExtension<GameTheme> {
     travelerSizeFactor: 0.5,
     trainSizeFactor: 0.7,
     initialNumberOfCars: 3,
-    initialDifficulty: Difficulty.easy,
   );
 
   @override
@@ -94,7 +91,6 @@ class GameTheme extends ThemeExtension<GameTheme> {
         speedInCellsPerSecond:
             speedInCellsPerSecond ?? this.speedInCellsPerSecond,
         initialNumberOfCars: initialNumberOfCars ?? this.initialNumberOfCars,
-        initialDifficulty: initialDifficulty ?? this.initialDifficulty,
       );
 
   @override

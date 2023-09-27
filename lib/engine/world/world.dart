@@ -21,7 +21,11 @@ class World {
       startCell: _matrix.center(),
       initialNumberOfCars: initialNumberOfCars,
     );
-    _travelers = Travelers(gridSize: gridSize, cellsMatrix: _matrix);
+    _travelers = Travelers(
+      gridSize: gridSize,
+      cellsMatrix: _matrix,
+      difficulty: difficulty,
+    );
   }
 
   final CellsMatrix _matrix;

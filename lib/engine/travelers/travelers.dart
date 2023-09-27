@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:bullet_train/engine/engine.dart';
+import 'package:bullet_train/shared/difficulty.dart';
 
 enum TravelerType {
   vilain,
@@ -9,12 +10,17 @@ enum TravelerType {
 }
 
 class Travelers {
-  Travelers({required GridSize gridSize, required CellsMatrix cellsMatrix})
-      : _gridSize = gridSize,
-        _matrix = cellsMatrix;
+  Travelers({
+    required GridSize gridSize,
+    required CellsMatrix cellsMatrix,
+    required Difficulty difficulty,
+  }) :  _gridSize = gridSize,
+        _matrix = cellsMatrix,
+        _difficulty = difficulty;
 
   final GridSize _gridSize;
   final CellsMatrix _matrix;
+  final Difficulty _difficulty;
 
   final _random = Random(DateTime.now().millisecondsSinceEpoch);
   final _all = <Traveler>[];
@@ -52,7 +58,7 @@ class Travelers {
       // Vilains
       final vilains = _all.where((p) => p.type == TravelerType.vilain);
 
-      while (vilains.length < train.bodies.length - 1) {
+      while (vilains.length < train.bodies.length * _difficulty.intValue) {
         final vilainCell = availableOffsets.toList(
           growable: false,
         )[_random.nextInt(availableOffsets.length)];
