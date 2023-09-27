@@ -24,15 +24,18 @@ class BulletTrain extends FlameGame
 
   var _gameOver = false;
   final _paused = false;
-  ValueNotifier<int> score = ValueNotifier(0);
+  final ValueNotifier<int> score = ValueNotifier(0);
 
   @override
   Color backgroundColor() => theme.backgroundColor;
 
   @override
   Future<void> onLoad() async {
+    score.value = theme.initialNumberOfCars;
+
     engineWorld = World(
       gridSize: theme.gridSize,
+      initialNumberOfCars: theme.initialNumberOfCars,
       onScoreIncrease: increaseScore,
       onScoreDecrease: decreaseScore,
     );

@@ -9,6 +9,7 @@ import 'package:bullet_train/engine/engine.dart';
 class World {
   World({
     required GridSize gridSize,
+    required this.initialNumberOfCars,
     required this.onScoreIncrease,
     required this.onScoreDecrease,
   }) : _matrix = CellsMatrix(
@@ -16,6 +17,7 @@ class World {
         ) {
     train = Train(
       startCell: _matrix.center(),
+      initialNumberOfCars: initialNumberOfCars,
     );
     _travelers = Travelers(gridSize: gridSize, cellsMatrix: _matrix);
   }
@@ -31,6 +33,7 @@ class World {
 
   /// Called when score is decreased.
   final VoidCallback onScoreDecrease;
+  final int initialNumberOfCars;
 
   /// The cells matrix of the world.
   UnmodifiableListView<Cell> get cells => _matrix.cells;

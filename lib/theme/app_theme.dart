@@ -51,6 +51,7 @@ class AppTheme {
         travelerSizeFactor: 0.5,
         trainSizeFactor: 0.7,
         speedInCellsPerSecond: 3,
+        initialNumberOfCars: 0,
       ),
     ],
     textTheme: GoogleFonts.poppinsTextTheme(),

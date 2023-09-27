@@ -9,13 +9,13 @@ export 'body.dart';
 export 'rails.dart';
 
 class Train {
-  Train({required Cell startCell}) {
+  Train({required Cell startCell, required int initialNumberOfCars}) {
     final rail = startCell.toRail(Position.bottom, Position.top);
 
     _rails.addRail(rail);
     _bodies.add(TrainHead(rail: rail, offset: rail.center, angle: math.pi / 2));
 
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < initialNumberOfCars; i++) {
       addCar();
     }
   }
