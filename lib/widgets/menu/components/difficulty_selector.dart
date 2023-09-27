@@ -1,4 +1,3 @@
-import 'package:bullet_train/design/colors.dart';
 import 'package:bullet_train/shared/difficulty.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +15,6 @@ class DifficultySelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownMenu(
       label: const Text('Difficulté'),
-      textStyle: const TextStyle(color: ConnectColors.textPrimary),
       initialSelection: initialDifficulty,
       onSelected: onSelected,
       dropdownMenuEntries: Difficulty.entries.map((difficulty) {

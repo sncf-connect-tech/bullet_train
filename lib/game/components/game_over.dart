@@ -22,7 +22,7 @@ class GameOver extends StatelessWidget {
         duration: Duration(milliseconds: isVisible ? 500 : 100),
         child: Container(
           decoration: BoxDecoration(
-            color: ConnectColors.background.withOpacity(0.75),
+            color: Theme.of(context).colorScheme.background.withOpacity(0.75),
             borderRadius: BorderRadius.circular(45),
           ),
           height: 350 + Dimens.columnSpacing * 2,
@@ -34,30 +34,20 @@ class GameOver extends StatelessWidget {
             ),
             child: Column(
               children: [
-                const Stack(
+                Stack(
                   alignment: Alignment.center,
                   clipBehavior: Clip.antiAlias,
                   children: [
                     NeonEffect(
-                      color: ConnectColors.error,
                       child: Text(
                         'ゲームオーバー',
-                        style: TextStyle(
-                          color: ConnectColors.error,
-                          fontWeight: FontWeight.w900,
-                          fontSize: 60,
-                        ),
+                        style: Theme.of(context).textTheme.titleLarge,
                       ),
                     ),
                     NeonEffect(
-                      color: ConnectColors.error,
                       child: Text(
                         'GAME OVER',
-                        style: TextStyle(
-                          color: ConnectColors.textPrimary,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 60,
-                        ),
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ),
                   ],

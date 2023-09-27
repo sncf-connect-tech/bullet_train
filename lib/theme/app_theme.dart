@@ -40,6 +40,9 @@ class AppTheme {
       onBackground: ConnectColors.onBackground,
       brightness: _baseTheme.brightness,
     ),
+    dropdownMenuTheme: const DropdownMenuThemeData(
+      textStyle: TextStyle(color: ConnectColors.textPrimary),
+    ),
     extensions: [
       GameTheme(
         backgroundColor: ConnectColors.background,
@@ -57,6 +60,22 @@ class AppTheme {
         initialNumberOfCars: 0,
       ),
     ],
-    textTheme: GoogleFonts.poppinsTextTheme(),
+    textTheme: GoogleFonts.poppinsTextTheme().copyWith(
+      titleMedium: const TextStyle(
+        color: ConnectColors.textPrimary,
+        fontWeight: FontWeight.bold,
+        fontSize: 60,
+      ),
+      titleLarge: const TextStyle(
+        color: ConnectColors.error,
+        fontWeight: FontWeight.w900,
+        fontSize: 80,
+      ),
+      displayLarge: const TextStyle(
+        color: ConnectColors.primaryDark,
+        fontWeight: FontWeight.bold,
+        fontSize: 40,
+      ),
+    ),
   );
 }

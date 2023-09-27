@@ -114,7 +114,6 @@ class _MenuViewState extends State<MenuView> {
                         Expanded(
                           flex: 2,
                           child: NeonEffect(
-                            color: ConnectColors.error,
                             child: Assets.images.bulletTrainCharacters.image(),
                           ),
                         ),
