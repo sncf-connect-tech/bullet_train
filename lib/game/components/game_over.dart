@@ -18,9 +18,8 @@ class GameOver extends StatelessWidget {
     return IgnorePointer(
       ignoring: !isVisible,
       child: AnimatedOpacity(
-        curve: Curves.easeOut,
         opacity: isVisible ? 1.0 : 0.0,
-        duration: const Duration(milliseconds: 400),
+        duration: Duration(milliseconds: isVisible ? 500 : 100),
         child: Container(
           decoration: BoxDecoration(
             color: ConnectColors.background.withOpacity(0.75),
@@ -64,14 +63,18 @@ class GameOver extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: Dimens.minColumnSpacing),
-                NavigationButton(
-                  title: 'Rejouer',
-                  onPressed: () => onPressContinue?.call(),
+                Expanded(
+                  child: NavigationButton(
+                    title: 'Rejouer',
+                    onPressed: () => onPressContinue?.call(),
+                  ),
                 ),
                 const SizedBox(height: Dimens.minColumnSpacing),
-                NavigationButton(
-                  title: "Retour à l'écran titre",
-                  onPressed: () => onPressLeave?.call(),
+                Expanded(
+                  child: NavigationButton(
+                    title: "Retour à l'écran titre",
+                    onPressed: () => onPressLeave?.call(),
+                  ),
                 ),
               ],
             ),

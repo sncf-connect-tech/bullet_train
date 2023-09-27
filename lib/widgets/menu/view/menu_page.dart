@@ -82,32 +82,41 @@ class _MenuViewState extends State<MenuView> {
                           child: Column(
                             children: [
                               // FIXME: ajouter un bouton pour lancer le jeu
-                              NavigationButton(
-                                title: 'Démarrer',
-                                onPressed: () {
-                                  Navigator.of(context).push(
-                                    GamePage.route(difficulty: difficulty),
-                                  );
-                                },
+                              Expanded(
+                                child: NavigationButton(
+                                  title: 'Démarrer',
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                      GamePage.route(difficulty: difficulty),
+                                    );
+                                  },
+                                ),
                               ),
                               const SizedBox(height: Dimens.columnSpacing),
-                              NavigationButton(
-                                title: 'Score',
-                                onPressed: () {/* TODO: ScorePage */},
+                              Expanded(
+                                child: NavigationButton(
+                                  title: 'Score',
+                                  onPressed: () {/* TODO: ScorePage */},
+                                ),
                               ),
                               const SizedBox(height: Dimens.columnSpacing),
-                              NavigationButton(
-                                title: 'À propos',
-                                onPressed: () {/* TODO: AboutPage */},
+                              Expanded(
+                                child: NavigationButton(
+                                  title: 'À propos',
+                                  onPressed: () {/* TODO: AboutPage */},
+                                ),
                               ),
                               const SizedBox(height: Dimens.columnSpacing),
                             ],
                           ),
                         ),
                         const SizedBox(width: Dimens.rowSpacing),
-                        NeonEffect(
-                          color: ConnectColors.error,
-                          child: Assets.images.bulletTrainCharacters.image(),
+                        Expanded(
+                          flex: 2,
+                          child: NeonEffect(
+                            color: ConnectColors.error,
+                            child: Assets.images.bulletTrainCharacters.image(),
+                          ),
                         ),
                       ],
                     ),
