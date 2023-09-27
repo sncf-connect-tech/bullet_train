@@ -117,6 +117,8 @@ class BulletTrain extends FlameGame
   }
 
   void decreaseScore() {
-    score.value--;
+    if (score.value > 0) {
+      score.value--;
+    }
   }
 }
