@@ -55,6 +55,10 @@ class BulletTrain extends FlameGame
   void update(double dt) {
     super.update(dt);
 
+    if (world.train.bodies.isEmpty) {
+      over();
+    }
+
     if (_gameOver || _paused) return;
 
     final trainCarsToRemove = children

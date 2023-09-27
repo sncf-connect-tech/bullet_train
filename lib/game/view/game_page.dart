@@ -108,32 +108,25 @@ class _GameViewState extends State<GameView> {
             },
           ),
         ),
-        AnimatedOpacity(
-          opacity: _gameOver ? 1.0 : 0.0,
-          duration: const Duration(milliseconds: 500),
-          child: Visibility(
-            visible: _gameOver,
-            child: Center(
-              child: GameOver(
-                onPressContinue: () {
-                  setState(() {
-                    _gameOver = false;
-                  });
-                  // TODO(alexis): peut-être un truc plus efficient qu'un pop
-                  // and push
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(
-                    GamePage.route(difficulty: widget.difficulty),
-                  );
-                },
-                onPressLeave: () {
-                  setState(() {
-                    _gameOver = false;
-                  });
-                  Navigator.of(context).pop();
-                },
-              ),
-            ),
+        Center(
+          child: GameOver(
+            isVisible: _gameOver,
+            onPressContinue: () {
+              setState(() {
+                _gameOver = false;
+              });
+              // TODO: peut-être un truc plus efficient qu'un pop and push
+              Navigator.of(context).pop();
+              Navigator.of(context).push(
+                GamePage.route(difficulty: widget.difficulty),
+              );
+            },
+            onPressLeave: () {
+              setState(() {
+                _gameOver = false;
+              });
+              Navigator.of(context).pop();
+            },
           ),
         ),
       ],

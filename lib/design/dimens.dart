@@ -4,5 +4,5 @@ class Dimens {
   static const columnSpacing = 32.0;
   static const minColumnSpacing = 16.0;
 
-  static const blurSigma = 8.0;
+  static const blurSigma = 3.0;
 }
