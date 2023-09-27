@@ -8,13 +8,13 @@ class GameTheme extends ThemeExtension<GameTheme> {
     required this.backgroundColor,
     required this.snakeHeadColor,
     required this.snakeBodyColor,
-    required this.travellerHeroColor,
-    required this.travellerVillainColor,
+    required this.travelerHeroColor,
+    required this.travelerVillainColor,
     required this.wallsColor,
     required this.cellOddColor,
     required this.cellEvenColor,
     required this.gridSize,
-    required this.travellerSizeFactor,
+    required this.travelerSizeFactor,
     required this.trainSizeFactor,
     required this.speedInCellsPerSecond,
   })  : assert(gridSize.width.isOdd, 'gridSize width must be odd'),
@@ -23,8 +23,8 @@ class GameTheme extends ThemeExtension<GameTheme> {
   final Color backgroundColor;
   final Color snakeHeadColor;
   final Color snakeBodyColor;
-  final Color travellerHeroColor;
-  final Color travellerVillainColor;
+  final Color travelerHeroColor;
+  final Color travelerVillainColor;
   final Color wallsColor;
   final Color cellOddColor;
   final Color cellEvenColor;
@@ -32,7 +32,7 @@ class GameTheme extends ThemeExtension<GameTheme> {
   /// The size of the grid in pixels
   /// /!\ Must be odd
   final GridSize gridSize;
-  final double travellerSizeFactor;
+  final double travelerSizeFactor;
   final double trainSizeFactor;
 
   final double speedInCellsPerSecond;
@@ -48,9 +48,9 @@ class GameTheme extends ThemeExtension<GameTheme> {
     cellEvenColor: Colors.yellow,
     gridSize: (width: 17, height: 33),
     speedInCellsPerSecond: 2,
-    travellerHeroColor: Colors.green,
-    travellerVillainColor: Colors.red,
-    travellerSizeFactor: 0.5,
+    travelerHeroColor: Colors.green,
+    travelerVillainColor: Colors.red,
+    travelerSizeFactor: 0.5,
     trainSizeFactor: 0.7,
   );
 
@@ -59,13 +59,13 @@ class GameTheme extends ThemeExtension<GameTheme> {
     Color? backgroundColor,
     Color? snakeHeadColor,
     Color? snakeBodyColor,
-    Color? travellerHeroColor,
-    Color? travellerVillainColor,
+    Color? travelerHeroColor,
+    Color? travelerVillainColor,
     Color? wallsColor,
     Color? cellOddColor,
     Color? cellEvenColor,
     GridSize? gridSize,
-    double? travellerSizeFactor,
+    double? travelerSizeFactor,
     double? trainSizeFactor,
     double? speedInCellsPerSecond,
   }) =>
@@ -73,14 +73,13 @@ class GameTheme extends ThemeExtension<GameTheme> {
         backgroundColor: backgroundColor ?? this.backgroundColor,
         snakeHeadColor: snakeHeadColor ?? this.snakeHeadColor,
         snakeBodyColor: snakeBodyColor ?? this.snakeBodyColor,
-        travellerHeroColor: travellerHeroColor ?? this.travellerHeroColor,
-        travellerVillainColor:
-            travellerVillainColor ?? this.travellerVillainColor,
+        travelerHeroColor: travelerHeroColor ?? this.travelerHeroColor,
+        travelerVillainColor: travelerVillainColor ?? this.travelerVillainColor,
         wallsColor: wallsColor ?? this.wallsColor,
         cellOddColor: cellOddColor ?? this.cellOddColor,
         cellEvenColor: cellEvenColor ?? this.cellEvenColor,
         gridSize: gridSize ?? this.gridSize,
-        travellerSizeFactor: travellerSizeFactor ?? this.travellerSizeFactor,
+        travelerSizeFactor: travelerSizeFactor ?? this.travelerSizeFactor,
         trainSizeFactor: trainSizeFactor ?? this.trainSizeFactor,
         speedInCellsPerSecond:
             speedInCellsPerSecond ?? this.speedInCellsPerSecond,
@@ -97,11 +96,11 @@ class GameTheme extends ThemeExtension<GameTheme> {
       backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t),
       snakeHeadColor: Color.lerp(snakeHeadColor, other.snakeHeadColor, t),
       snakeBodyColor: Color.lerp(snakeBodyColor, other.snakeBodyColor, t),
-      travellerHeroColor:
-          Color.lerp(travellerHeroColor, other.travellerHeroColor, t),
-      travellerVillainColor: Color.lerp(
-        travellerVillainColor,
-        other.travellerVillainColor,
+      travelerHeroColor:
+          Color.lerp(travelerHeroColor, other.travelerHeroColor, t),
+      travelerVillainColor: Color.lerp(
+        travelerVillainColor,
+        other.travelerVillainColor,
         t,
       ),
       wallsColor: Color.lerp(wallsColor, other.wallsColor, t),
@@ -121,9 +120,9 @@ class GameTheme extends ThemeExtension<GameTheme> {
             )?.round() ??
             other.gridSize.height,
       ),
-      travellerSizeFactor: lerpDouble(
-        travellerSizeFactor,
-        other.travellerSizeFactor,
+      travelerSizeFactor: lerpDouble(
+        travelerSizeFactor,
+        other.travelerSizeFactor,
         t,
       ),
       trainSizeFactor: lerpDouble(

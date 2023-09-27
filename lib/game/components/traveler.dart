@@ -7,26 +7,26 @@ import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
 import 'package:flutter/painting.dart';
 
-class TravellerComponent extends CircleComponent with HasGameRef<BulletTrain> {
-  TravellerComponent({
-    required this.traveller,
-  }) : super(priority: GameLayer.traveller.priority);
+class TravelerComponent extends CircleComponent with HasGameRef<BulletTrain> {
+  TravelerComponent({
+    required this.traveler,
+  }) : super(priority: GameLayer.traveler.priority);
 
-  final Traveller traveller;
+  final Traveler traveler;
 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
 
     final paint = Paint()
-      ..color = switch (traveller.type) {
-        TravellerType.hero => gameRef.theme.travellerHeroColor,
-        TravellerType.vilain => gameRef.theme.travellerVillainColor
+      ..color = switch (traveler.type) {
+        TravelerType.hero => gameRef.theme.travelerHeroColor,
+        TravelerType.vilain => gameRef.theme.travelerVillainColor
       };
 
     add(
       CircleHitbox(
-        radius: _travellerRadius,
+        radius: _travelerRadius,
         anchor: Anchor.center,
         isSolid: true,
       )
@@ -46,25 +46,25 @@ class TravellerComponent extends CircleComponent with HasGameRef<BulletTrain> {
   void onGameResize(Vector2 size) {
     _updatePosition();
 
-    children.whereType<CircleHitbox>().single.radius = _travellerRadius;
+    children.whereType<CircleHitbox>().single.radius = _travelerRadius;
 
     super.onGameResize(size);
   }
 
   void _updatePosition() {
-    final offset = traveller.offset;
+    final offset = traveler.offset;
 
-    position = traveller.cell
+    position = traveler.cell
         .getOffsetFromScreenSize(offset, gameRef.size.toSize())
         .toVector2();
   }
 
-  double get _travellerRadius {
-    final travellerSizeFactor = game.theme.travellerSizeFactor;
+  double get _travelerRadius {
+    final travelerSizeFactor = game.theme.travelerSizeFactor;
 
     return math.min(
-      game.size.x / game.theme.gridSize.width / 2 * travellerSizeFactor,
-      game.size.y / game.theme.gridSize.height / 2 * travellerSizeFactor,
+      game.size.x / game.theme.gridSize.width / 2 * travelerSizeFactor,
+      game.size.y / game.theme.gridSize.height / 2 * travelerSizeFactor,
     );
   }
 }

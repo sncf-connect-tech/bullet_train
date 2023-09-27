@@ -67,10 +67,9 @@ class BulletTrain extends FlameGame
           add(TrainComponent(trainBody: car));
         },
       )
-      ..addTravellerIfNeeded(
-        trainSize: engineWorld.train.bodies.length,
-        onTravellerAdded: (traveller) {
-          add(TravellerComponent(traveller: traveller));
+      ..addTravelerIfNeeded(
+        onTravelerAdded: (traveler) {
+          add(TravelerComponent(traveler: traveler));
         },
       );
   }
