@@ -115,10 +115,16 @@ class _GameViewState extends State<GameView> {
               setState(() {
                 _gameOver = false;
               });
-              // TODO: peut-être un truc plus efficient qu'un pop and push
-              Navigator.of(context).pop();
-              Navigator.of(context).push(
-                GamePage.route(difficulty: widget.difficulty),
+
+              _game = BulletTrain(
+                effectPlayer: context.read<AudioCubit>().effectPlayer,
+                theme: gameTheme,
+                difficulty: widget.difficulty,
+                onGameOver: () {
+                  setState(() {
+                    _gameOver = true;
+                  });
+                },
               );
             },
             onPressLeave: () {

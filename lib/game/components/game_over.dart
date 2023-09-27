@@ -18,8 +18,9 @@ class GameOver extends StatelessWidget {
     return IgnorePointer(
       ignoring: !isVisible,
       child: AnimatedOpacity(
+        curve: Curves.easeOut,
         opacity: isVisible ? 1.0 : 0.0,
-        duration: const Duration(milliseconds: 1000),
+        duration: const Duration(milliseconds: 400),
         child: Container(
           decoration: BoxDecoration(
             color: ConnectColors.background.withOpacity(0.75),
