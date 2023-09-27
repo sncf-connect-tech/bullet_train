@@ -69,7 +69,7 @@ import 'package:bullet_train/engine/engine.dart';
   const rad = math.pi / 2;
   final radius = rect.width / 2;
 
-  final pixelsInRad = (pixels / radius) * rad;
+  final pixelsInRad = pixels / radius;
 
   (double, double) computeNewAngle(
     Offset offset, {
@@ -81,8 +81,7 @@ import 'package:bullet_train/engine/engine.dart';
     }
 
     final overflowPixels =
-        ((currentAngle + pixelsInRad - rad) / rad).clamp(0, double.infinity) *
-            radius;
+        (currentAngle + pixelsInRad - rad).clamp(0, double.infinity) * radius;
 
     if (overflowPixels > 0) {
       return (0, overflowPixels);
