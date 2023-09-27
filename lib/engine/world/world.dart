@@ -2,6 +2,7 @@ import 'dart:collection';
 import 'dart:ui';
 
 import 'package:bullet_train/engine/engine.dart';
+import 'package:bullet_train/shared/difficulty.dart';
 
 /// The world of the game that contains the train and the travelers.
 /// [gridSize] define the size of the grid in the world.
@@ -10,6 +11,7 @@ class World {
   World({
     required GridSize gridSize,
     required this.initialNumberOfCars,
+    required this.difficulty,
     required this.onScoreIncrease,
     required this.onScoreDecrease,
   }) : _matrix = CellsMatrix(
@@ -28,12 +30,17 @@ class World {
   /// The train moving in the world.
   late final Train train;
 
+  /// the initial number of train cars
+  final int initialNumberOfCars;
+
+  /// The game difficulty
+  final Difficulty difficulty;
+
   /// Called when score is increased.
   final VoidCallback onScoreIncrease;
 
   /// Called when score is decreased.
   final VoidCallback onScoreDecrease;
-  final int initialNumberOfCars;
 
   /// The cells matrix of the world.
   UnmodifiableListView<Cell> get cells => _matrix.cells;

@@ -1,5 +1,6 @@
 import 'package:bullet_train/cubit/cubit.dart';
 import 'package:bullet_train/game/game.dart';
+import 'package:bullet_train/shared/difficulty.dart';
 import 'package:bullet_train/theme/theme.dart';
 import 'package:flame/game.dart' hide Route;
 import 'package:flame_audio/bgm.dart';
@@ -7,11 +8,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GamePage extends StatelessWidget {
-  const GamePage({super.key});
+  const GamePage({required this.difficulty, super.key});
 
-  static Route<void> route() {
+  final Difficulty difficulty;
+
+  static Route<void> route({ required Difficulty difficulty}) {
     return MaterialPageRoute<void>(
-      builder: (_) => const GamePage(),
+      builder: (_) => GamePage(difficulty: difficulty),
     );
   }
 
@@ -21,17 +24,22 @@ class GamePage extends StatelessWidget {
       create: (context) {
         return AudioCubit(audioCache: context.read<PreloadCubit>().audio);
       },
-      child: const Scaffold(
-        body: SafeArea(child: GameView()),
+      child: Scaffold(
+        body: SafeArea(
+          child: GameView(
+            difficulty: difficulty,
+          ),
+        ),
       ),
     );
   }
 }
 
 class GameView extends StatefulWidget {
-  const GameView({super.key, this.game});
+  const GameView({required this.difficulty, this.game, super.key});
 
   final FlameGame? game;
+  final Difficulty difficulty;
 
   @override
   State<GameView> createState() => _GameViewState();
@@ -65,6 +73,7 @@ class _GameViewState extends State<GameView> {
         BulletTrain(
           effectPlayer: context.read<AudioCubit>().effectPlayer,
           theme: gameTheme,
+          difficulty: widget.difficulty,
           onGameOver: () {
             setState(() {
               _gameOver = true;
@@ -113,7 +122,9 @@ class _GameViewState extends State<GameView> {
                   // TODO(alexis): peut-être un truc plus efficient qu'un pop
                   // and push
                   Navigator.of(context).pop();
-                  Navigator.of(context).push(GamePage.route());
+                  Navigator.of(context).push(
+                    GamePage.route(difficulty: widget.difficulty),
+                  );
                 },
                 onPressLeave: () {
                   setState(() {

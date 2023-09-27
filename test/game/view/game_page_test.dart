@@ -4,6 +4,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:bullet_train/cubit/cubit.dart';
 import 'package:bullet_train/game/game.dart';
+import 'package:bullet_train/shared/difficulty.dart';
 import 'package:flame_audio/bgm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,7 +40,9 @@ void main() {
           Builder(
             builder: (context) => Scaffold(
               floatingActionButton: FloatingActionButton(
-                onPressed: () => Navigator.of(context).push(GamePage.route()),
+                onPressed: () => Navigator.of(context).push(
+                  GamePage.route(difficulty: Difficulty.easy),
+                ),
               ),
             ),
           ),
@@ -58,7 +61,7 @@ void main() {
     testWidgets('renders GameView', (tester) async {
       await tester.runAsync(() async {
         await tester.pumpApp(
-          const GamePage(),
+          const GamePage(difficulty: Difficulty.easy),
           preloadCubit: preloadCubit,
         );
         expect(find.byType(GameView), findsOneWidget);
@@ -93,7 +96,12 @@ void main() {
       await tester.pumpApp(
         BlocProvider.value(
           value: audioCubit,
-          child: Material(child: GameView(game: game)),
+          child: Material(
+            child: GameView(
+              game: game,
+              difficulty: Difficulty.easy,
+            ),
+          ),
         ),
       );
 
@@ -123,7 +131,12 @@ void main() {
       await tester.pumpApp(
         BlocProvider.value(
           value: audioCubit,
-          child: Material(child: GameView(game: game)),
+          child: Material(
+            child: GameView(
+              game: game,
+              difficulty: Difficulty.easy,
+            ),
+          ),
         ),
       );
 

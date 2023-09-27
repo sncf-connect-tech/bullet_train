@@ -9,6 +9,7 @@ class AppTheme {
   static final _baseTheme = ThemeData.dark();
 
   static final ThemeData themeData = ThemeData(
+    useMaterial3: true,
     appBarTheme: const AppBarTheme(
       backgroundColor: ConnectColors.background,
       elevation: 0,
@@ -16,10 +17,13 @@ class AppTheme {
     fontFamily: defaultPolice,
     primaryColor: ConnectColors.primary,
     primaryColorDark: ConnectColors.primaryDark,
-    buttonTheme: _baseTheme.buttonTheme.copyWith(
-      buttonColor: ConnectColors.error,
-      highlightColor: Colors.transparent,
-      textTheme: ButtonTextTheme.primary,
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(ConnectColors.primary),
+        textStyle: MaterialStateProperty.all(
+            const TextStyle(color: ConnectColors.textPrimary),
+        ),
+      ),
     ),
     scaffoldBackgroundColor: ConnectColors.background,
     cardColor: ConnectColors.surface,
