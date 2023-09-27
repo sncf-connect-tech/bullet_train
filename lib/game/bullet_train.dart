@@ -20,7 +20,7 @@ class BulletTrain extends FlameGame
   final GameTheme theme;
   final VoidCallback onGameOver;
 
-  late World world;
+  late World engineWorld;
 
   var _gameOver = false;
   final _paused = false;
@@ -31,7 +31,7 @@ class BulletTrain extends FlameGame
 
   @override
   Future<void> onLoad() async {
-    world = World(
+    engineWorld = World(
       gridSize: theme.gridSize,
       onScoreIncrease: increaseScore,
       onScoreDecrease: decreaseScore,
@@ -39,7 +39,7 @@ class BulletTrain extends FlameGame
 
     await addAll([
       GameBackgroundComponent(),
-      TrainComponent(trainBody: world.train.head),
+      TrainComponent(trainBody: engineWorld.train.head),
       ScreenHitbox(),
     ]);
   }
@@ -52,7 +52,7 @@ class BulletTrain extends FlameGame
 
     final trainCarsToRemove = children
         .whereType<TrainComponent>()
-        .where((tc) => !world.train.bodies.any((b) => b == tc.trainBody));
+        .where((tc) => !engineWorld.train.bodies.any((b) => b == tc.trainBody));
 
     for (final car in trainCarsToRemove) {
       car.removeFromParent();
@@ -60,7 +60,7 @@ class BulletTrain extends FlameGame
 
     final dtPixels = theme.speedInCellsPerSecond * dt;
 
-    world
+    engineWorld
       ..moveForward(
         dtPixels,
         onNewDisplayedCar: (car) {
@@ -68,7 +68,7 @@ class BulletTrain extends FlameGame
         },
       )
       ..addTravellerIfNeeded(
-        trainSize: world.train.bodies.length,
+        trainSize: engineWorld.train.bodies.length,
         onTravellerAdded: (traveller) {
           add(TravellerComponent(traveller: traveller));
         },
@@ -86,16 +86,16 @@ class BulletTrain extends FlameGame
     Set<LogicalKeyboardKey> keysPressed,
   ) {
     if (keysPressed.contains(LogicalKeyboardKey.arrowUp)) {
-      world.moveNextTo(Position.top);
+      engineWorld.moveNextTo(Position.top);
       return KeyEventResult.handled;
     } else if (keysPressed.contains(LogicalKeyboardKey.arrowDown)) {
-      world.moveNextTo(Position.bottom);
+      engineWorld.moveNextTo(Position.bottom);
       return KeyEventResult.handled;
     } else if (keysPressed.contains(LogicalKeyboardKey.arrowLeft)) {
-      world.moveNextTo(Position.left);
+      engineWorld.moveNextTo(Position.left);
       return KeyEventResult.handled;
     } else if (keysPressed.contains(LogicalKeyboardKey.arrowRight)) {
-      world.moveNextTo(Position.right);
+      engineWorld.moveNextTo(Position.right);
       return KeyEventResult.handled;
     }
 

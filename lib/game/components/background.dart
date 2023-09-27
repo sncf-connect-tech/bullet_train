@@ -15,7 +15,7 @@ class GameBackgroundComponent extends PositionComponent
 
   @override
   FutureOr<void> onLoad() {
-    for (final cell in game.world.cells) {
+    for (final cell in game.engineWorld.cells) {
       add(
         RectangleComponent.fromRect(
           cell.getRectFromScreenSize(_parentSize.toSize()),
@@ -28,7 +28,7 @@ class GameBackgroundComponent extends PositionComponent
   @override
   void onParentResize(Vector2 maxSize) {
     final cellsRendered = children.whereType<RectangleComponent>().toList();
-    final cells = game.world.cells;
+    final cells = game.engineWorld.cells;
 
     assert(
       cellsRendered.length <= cellsRendered.length,

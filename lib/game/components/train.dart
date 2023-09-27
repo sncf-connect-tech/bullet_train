@@ -18,7 +18,7 @@ class TrainComponent extends PositionComponent
 
   final TrainBody trainBody;
 
-  Size get _gridSize => gameRef.world.gridSize;
+  Size get _gridSize => gameRef.engineWorld.gridSize;
   Vector2 get _parentSize => gameRef.size;
   GameTheme get _theme => gameRef.theme;
 
@@ -67,16 +67,16 @@ class TrainComponent extends PositionComponent
     } else if (other is TrainComponent) {
       gameRef.over();
     } else if (other is TravellerComponent) {
-      gameRef.world.removeTraveller(other.traveller);
+      gameRef.engineWorld.removeTraveller(other.traveller);
       other.removeFromParent();
 
       switch (other.traveller.type) {
         case TravellerType.hero:
-          gameRef.world.onScoreIncrease();
-          gameRef.world.addTrainCar();
+          gameRef.engineWorld.onScoreIncrease();
+          gameRef.engineWorld.addTrainCar();
         case TravellerType.vilain:
-          gameRef.world.onScoreDecrease();
-          gameRef.world.removeTrainCar();
+          gameRef.engineWorld.onScoreDecrease();
+          gameRef.engineWorld.removeTrainCar();
       }
     }
   }
