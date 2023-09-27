@@ -110,7 +110,8 @@ class _GameViewState extends State<GameView> {
                   setState(() {
                     _gameOver = false;
                   });
-                  // TODO(alexis): peut-être un truc plus efficient qu'un pop and push
+                  // TODO(alexis): peut-être un truc plus efficient qu'un pop
+                  // and push
                   Navigator.of(context).pop();
                   Navigator.of(context).push(GamePage.route());
                 },
