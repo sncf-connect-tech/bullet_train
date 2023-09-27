@@ -7,8 +7,8 @@ import 'package:bullet_train/shared/difficulty.dart';
 /// The world of the game that contains the train and the travelers.
 /// [gridSize] define the size of the grid in the world.
 /// To handle score, [onScoreIncrease] and [onScoreDecrease] are called.
-class World {
-  World({
+class EngineWorld {
+  EngineWorld({
     required GridSize gridSize,
     required this.initialNumberOfCars,
     required this.difficulty,

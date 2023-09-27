@@ -56,11 +56,8 @@ class TrainComponent extends PositionComponent
   }
 
   @override
-  void onCollisionStart(
-    Set<Vector2> intersectionPoints,
-    PositionComponent other,
-  ) {
-    super.onCollisionStart(intersectionPoints, other);
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    super.onCollision(intersectionPoints, other);
 
     if (other is ScreenHitbox) {
       gameRef.over();

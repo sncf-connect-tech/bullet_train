@@ -3,7 +3,7 @@ import 'package:bullet_train/engine/engine.dart';
 import 'package:bullet_train/game/game.dart';
 import 'package:bullet_train/shared/difficulty.dart';
 import 'package:bullet_train/theme/theme.dart';
-import 'package:flame/collisions.dart';
+import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/services.dart';
@@ -23,7 +23,7 @@ class BulletTrain extends FlameGame
   final Difficulty difficulty;
   final VoidCallback onGameOver;
 
-  late World engineWorld;
+  late EngineWorld engineWorld;
 
   var _gameOver = false;
   final _paused = false;
@@ -36,7 +36,7 @@ class BulletTrain extends FlameGame
   Future<void> onLoad() async {
     score.value = theme.initialNumberOfCars;
 
-    engineWorld = World(
+    engineWorld = EngineWorld(
       gridSize: theme.gridSize,
       initialNumberOfCars: theme.initialNumberOfCars,
       difficulty: difficulty,
