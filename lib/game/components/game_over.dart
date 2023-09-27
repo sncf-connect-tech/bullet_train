@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:bullet_train/design/design.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +25,7 @@ class GameOver extends StatelessWidget {
             color: ConnectColors.background.withOpacity(0.75),
             borderRadius: BorderRadius.circular(45),
           ),
-          height: 300 + Dimens.columnSpacing * 2,
+          height: 350 + Dimens.columnSpacing * 2,
           width: 600 + Dimens.rowSpacing * 2,
           child: Padding(
             padding: const EdgeInsets.symmetric(
@@ -65,18 +63,14 @@ class GameOver extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: Dimens.minColumnSpacing),
-                Expanded(
-                  child: NavigationButton(
-                    title: 'Rejouer',
-                    onPressed: () => onPressContinue?.call(),
-                  ),
+                NavigationButton(
+                  title: 'Rejouer',
+                  onPressed: () => onPressContinue?.call(),
                 ),
                 const SizedBox(height: Dimens.minColumnSpacing),
-                Expanded(
-                  child: NavigationButton(
-                    title: "Retour à l'écran titre",
-                    onPressed: () => onPressLeave?.call(),
-                  ),
+                NavigationButton(
+                  title: "Retour à l'écran titre",
+                  onPressed: () => onPressLeave?.call(),
                 ),
               ],
             ),

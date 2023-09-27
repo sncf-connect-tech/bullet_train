@@ -1,4 +1,5 @@
 import 'package:bullet_train/design/colors.dart';
+import 'package:bullet_train/shared/difficulty.dart';
 import 'package:bullet_train/theme/game_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,9 +21,8 @@ class AppTheme {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all(ConnectColors.primary),
-        textStyle: MaterialStateProperty.all(
-            const TextStyle(color: ConnectColors.textPrimary),
-        ),
+        foregroundColor: MaterialStateProperty.all(ConnectColors.background),
+        textStyle: MaterialStateProperty.all(const TextStyle(fontSize: 30)),
       ),
     ),
     scaffoldBackgroundColor: ConnectColors.background,
@@ -56,6 +56,7 @@ class AppTheme {
         trainSizeFactor: 0.7,
         speedInCellsPerSecond: 3,
         initialNumberOfCars: 0,
+        initialDifficulty: Difficulty.medium,
       ),
     ],
     textTheme: GoogleFonts.poppinsTextTheme(),

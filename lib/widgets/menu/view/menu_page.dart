@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:bullet_train/design/design.dart';
 import 'package:bullet_train/game/game.dart';
 import 'package:bullet_train/gen/assets.gen.dart';
 import 'package:bullet_train/shared/difficulty.dart';
+import 'package:bullet_train/theme/theme.dart';
 import 'package:bullet_train/widgets/menu/components/difficulty_selector.dart';
 import 'package:bullet_train/widgets/menu/components/menu_title.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +13,8 @@ class MenuPage extends StatelessWidget {
   const MenuPage({super.key});
 
   static Route<void> route() {
-    return MaterialPageRoute<void>(
-      builder: (_) => const MenuPage(),
+    return PageRouteBuilder(
+      pageBuilder: (_, __, ___) => const MenuPage(),
     );
   }
 
@@ -31,82 +34,92 @@ class MenuView extends StatefulWidget {
 }
 
 class _MenuViewState extends State<MenuView> {
-  Difficulty difficulty = Difficulty.easy;
+  late Difficulty difficulty;
+  bool isVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    Timer(const Duration(milliseconds: 500), () {
+      setState(() {
+        isVisible = true;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: Dimens.rowSpacing),
-      child: Stack(
-        children: [
-          Positioned(
-            top: 30,
-            right: 30,
-            child: DifficultySelector(
-              initialDifficulty: difficulty,
-              onSelected: (selectedDifficulty) {
-                if (selectedDifficulty != null) {
-                  setState(() {
-                    difficulty = selectedDifficulty;
-                  });
-                }
-              },
+    difficulty = Theme.of(context).game.initialDifficulty;
+
+    return AnimatedOpacity(
+      opacity: isVisible ? 1 : 0,
+      duration: const Duration(milliseconds: 500),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: Dimens.rowSpacing),
+        child: Stack(
+          children: [
+            Positioned(
+              top: 30,
+              right: 30,
+              child: DifficultySelector(
+                initialDifficulty: difficulty,
+                onSelected: (selectedDifficulty) {
+                  if (selectedDifficulty != null) {
+                    setState(() => difficulty = selectedDifficulty);
+                  }
+                },
+              ),
             ),
-          ),
-          Center(
-            child: Column(
-              children: [
-                const Expanded(child: MenuTitle()),
-                Expanded(
-                  flex: 2,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            // FIXME: ajouter un bouton pour lancer le jeu
-                            Expanded(
-                              child: NavigationButton(
+            Center(
+              child: Column(
+                children: [
+                  const Expanded(child: MenuTitle()),
+                  Expanded(
+                    flex: 2,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            children: [
+                              // FIXME: ajouter un bouton pour lancer le jeu
+                              NavigationButton(
+                                title: 'Démarrer',
                                 onPressed: () {
                                   Navigator.of(context).push(
                                     GamePage.route(difficulty: difficulty),
                                   );
                                 },
-                                title: 'Démarrer',
                               ),
-                            ),
-                            const SizedBox(height: Dimens.columnSpacing),
-                            Expanded(
-                              child: NavigationButton(
-                                onPressed: () {/* TODO: ScorePage */},
+                              const SizedBox(height: Dimens.columnSpacing),
+                              NavigationButton(
                                 title: 'Score',
+                                onPressed: () {/* TODO: ScorePage */},
                               ),
-                            ),
-                            const SizedBox(height: Dimens.columnSpacing),
-                            Expanded(
-                              child: NavigationButton(
-                                onPressed: () {/* TODO: AboutPage */},
+                              const SizedBox(height: Dimens.columnSpacing),
+                              NavigationButton(
                                 title: 'À propos',
+                                onPressed: () {/* TODO: AboutPage */},
                               ),
-                            ),
-                            const SizedBox(height: Dimens.columnSpacing),
-                          ],
+                              const SizedBox(height: Dimens.columnSpacing),
+                            ],
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: Dimens.rowSpacing),
-                      NeonEffect(
-                        color: ConnectColors.error,
-                        child: Assets.images.bulletTrainCharacters.image(),
-                      ),
-                    ],
+                        const SizedBox(width: Dimens.rowSpacing),
+                        NeonEffect(
+                          color: ConnectColors.error,
+                          child: Assets.images.bulletTrainCharacters.image(),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

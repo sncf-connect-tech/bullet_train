@@ -12,12 +12,11 @@ class NavigationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      child: Center(
-        child: Text(
-          title,
-          style: Theme.of(context).textTheme.titleLarge,
+    return Expanded(
+      child: ElevatedButton(
+        onPressed: onPressed,
+        child: Center(
+          child: Text(title),
         ),
       ),
     );
