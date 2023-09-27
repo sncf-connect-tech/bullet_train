@@ -12,7 +12,7 @@ class World {
   })  : _matrix = CellsMatrix(
           gridSize: gridSize,
         ),
-        _passengers = [] {
+        _travellers = [] {
     train = Train(
       startCell: _matrix.center(),
     );
@@ -20,12 +20,12 @@ class World {
 
   late final Train train;
   final CellsMatrix _matrix;
-  final Passengers _passengers;
+  final Travellers _travellers;
   final VoidCallback onScoreIncrease;
   final VoidCallback onScoreDecrease;
 
   UnmodifiableListView<Cell> get cells => _matrix.cells;
-  Passengers get passengers => _passengers;
+  Travellers get travellers => _travellers;
 
   Size get gridSize => Size(
         _matrix.gridSize.width.toDouble(),
@@ -47,15 +47,15 @@ class World {
 
   late final Set<Cell> _allOffsets = _generateOffsets();
 
-  void addPassengerIfNeeded({
+  void addTravellerIfNeeded({
     required int trainSize,
-    required void Function(Passenger passenger) onPassengerAdded,
+    required void Function(Traveller traveller) onTravellerAdded,
   }) {
-    if (!_passengers.any((p) => p.type == PassengerType.hero)) {
+    if (!_travellers.any((p) => p.type == TravellerType.hero)) {
       final cars = Set<Cell>.from(
         train.bodies.map((body) => body.rail.cell),
       );
-      final psngrCells = Set<Cell>.from(_passengers.map((p) => p.cell));
+      final psngrCells = Set<Cell>.from(_travellers.map((p) => p.cell));
 
       final availableOffsets =
           _allOffsets.difference(cars).difference(psngrCells);
@@ -66,38 +66,38 @@ class World {
       final heroCell = availableOffsets.toList(
         growable: false,
       )[_random.nextInt(availableOffsets.length)];
-      final hero = Passenger(type: PassengerType.hero, cell: heroCell);
+      final hero = Traveller(type: TravellerType.hero, cell: heroCell);
 
       availableOffsets.remove(heroCell);
 
-      _passengers.add(hero);
-      onPassengerAdded(hero);
+      _travellers.add(hero);
+      onTravellerAdded(hero);
 
       if (availableOffsets.isEmpty) return;
 
       // Vilains
-      final vilains = _passengers.where((p) => p.type == PassengerType.vilain);
+      final vilains = _travellers.where((p) => p.type == TravellerType.vilain);
 
       while (vilains.length < trainSize - 1) {
         final vilainCell = availableOffsets.toList(
           growable: false,
         )[_random.nextInt(availableOffsets.length)];
-        final vilain = Passenger(
-          type: PassengerType.vilain,
+        final vilain = Traveller(
+          type: TravellerType.vilain,
           cell: vilainCell,
         );
 
         availableOffsets.remove(vilainCell);
 
-        _passengers.add(vilain);
-        onPassengerAdded(vilain);
+        _travellers.add(vilain);
+        onTravellerAdded(vilain);
 
         if (availableOffsets.isEmpty) return;
       }
     }
   }
 
-  void removePassenger(Passenger passenger) => _passengers.remove(passenger);
+  void removeTraveller(Traveller traveller) => _travellers.remove(traveller);
 
   Set<Cell> _generateOffsets() {
     final result = <Cell>{};

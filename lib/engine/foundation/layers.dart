@@ -1,6 +1,6 @@
 enum GameLayer {
   background(0),
-  passenger(10),
+  traveller(10),
   train(50);
 
   const GameLayer(this.priority);

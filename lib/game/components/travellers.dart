@@ -7,26 +7,26 @@ import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
 import 'package:flutter/painting.dart';
 
-class PassengerComponent extends CircleComponent with HasGameRef<BulletTrain> {
-  PassengerComponent({
-    required this.passenger,
-  }) : super(priority: GameLayer.passenger.priority);
+class TravellerComponent extends CircleComponent with HasGameRef<BulletTrain> {
+  TravellerComponent({
+    required this.traveller,
+  }) : super(priority: GameLayer.traveller.priority);
 
-  final Passenger passenger;
+  final Traveller traveller;
 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
 
     final paint = Paint()
-      ..color = switch (passenger.type) {
-        PassengerType.hero => gameRef.theme.passengerHeroColor,
-        PassengerType.vilain => gameRef.theme.passengerVillainColor
+      ..color = switch (traveller.type) {
+        TravellerType.hero => gameRef.theme.travellerHeroColor,
+        TravellerType.vilain => gameRef.theme.travellerVillainColor
       };
 
     add(
       CircleHitbox(
-        radius: _passengerRadius,
+        radius: _travellerRadius,
         anchor: Anchor.center,
         isSolid: true,
       )
@@ -46,25 +46,25 @@ class PassengerComponent extends CircleComponent with HasGameRef<BulletTrain> {
   void onGameResize(Vector2 size) {
     _updatePosition();
 
-    children.whereType<CircleHitbox>().single.radius = _passengerRadius;
+    children.whereType<CircleHitbox>().single.radius = _travellerRadius;
 
     super.onGameResize(size);
   }
 
   void _updatePosition() {
-    final offset = passenger.offset;
+    final offset = traveller.offset;
 
-    position = passenger.cell
+    position = traveller.cell
         .getOffsetFromScreenSize(offset, gameRef.size.toSize())
         .toVector2();
   }
 
-  double get _passengerRadius {
-    final passengerSizeFactor = game.theme.passengerSizeFactor;
+  double get _travellerRadius {
+    final travellerSizeFactor = game.theme.travellerSizeFactor;
 
     return math.min(
-      game.size.x / game.theme.gridSize.width / 2 * passengerSizeFactor,
-      game.size.y / game.theme.gridSize.height / 2 * passengerSizeFactor,
+      game.size.x / game.theme.gridSize.width / 2 * travellerSizeFactor,
+      game.size.y / game.theme.gridSize.height / 2 * travellerSizeFactor,
     );
   }
 }

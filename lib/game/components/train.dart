@@ -66,15 +66,15 @@ class TrainComponent extends PositionComponent
       gameRef.over();
     } else if (other is TrainComponent) {
       gameRef.over();
-    } else if (other is PassengerComponent) {
-      gameRef.world.removePassenger(other.passenger);
+    } else if (other is TravellerComponent) {
+      gameRef.world.removeTraveller(other.traveller);
       other.removeFromParent();
 
-      switch (other.passenger.type) {
-        case PassengerType.hero:
+      switch (other.traveller.type) {
+        case TravellerType.hero:
           gameRef.world.onScoreIncrease();
           gameRef.world.addTrainCar();
-        case PassengerType.vilain:
+        case TravellerType.vilain:
           gameRef.world.onScoreDecrease();
           gameRef.world.removeTrainCar();
       }
