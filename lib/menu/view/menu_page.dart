@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bullet_train/design/design.dart';
-import 'package:bullet_train/game/game.dart';
+import 'package:bullet_train/game/view/game_page.dart';
 import 'package:bullet_train/gen/assets.gen.dart';
 import 'package:bullet_train/menu/components/difficulty_selector.dart';
 import 'package:bullet_train/menu/components/menu_title.dart';

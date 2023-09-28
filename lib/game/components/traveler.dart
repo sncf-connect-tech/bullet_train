@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:bullet_train/engine/engine.dart';
-import 'package:bullet_train/game/game.dart';
+import 'package:bullet_train/game/bullet_train.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';

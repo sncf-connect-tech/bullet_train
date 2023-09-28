@@ -1,7 +1,9 @@
 import 'package:bullet_train/engine/engine.dart';
-import 'package:bullet_train/game/game.dart';
+import 'package:bullet_train/game/components/background.dart';
+import 'package:bullet_train/game/components/train.dart';
+import 'package:bullet_train/game/components/traveler.dart';
 import 'package:bullet_train/shared/difficulty.dart';
-import 'package:bullet_train/theme/theme.dart';
+import 'package:bullet_train/theme/game_theme.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';

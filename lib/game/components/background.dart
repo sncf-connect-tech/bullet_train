@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:bullet_train/engine/engine.dart';
-import 'package:bullet_train/game/game.dart';
-import 'package:bullet_train/theme/theme.dart';
+import 'package:bullet_train/game/bullet_train.dart';
+import 'package:bullet_train/theme/game_theme.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/painting.dart';
 

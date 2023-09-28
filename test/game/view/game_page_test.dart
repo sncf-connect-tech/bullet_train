@@ -1,8 +1,9 @@
-import 'package:bullet_train/game/game.dart';
+import 'package:bullet_train/game/view/game_page.dart';
 import 'package:bullet_train/shared/difficulty.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../helpers/helpers.dart';
+
+import '../../helpers/pump_app.dart';
 
 void main() {
   group('GamePage', () {
