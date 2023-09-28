@@ -1,10 +1,9 @@
-import 'package:bullet_train/bootstrap.dart';
 import 'package:bullet_train/menu/view/menu_page.dart';
 import 'package:bullet_train/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  bootstrap(() => const App());
+  runApp(const App());
 }
 
 
