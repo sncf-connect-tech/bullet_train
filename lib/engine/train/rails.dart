@@ -1,8 +1,8 @@
 import 'dart:collection';
 import 'dart:math' as math;
 
-import 'package:bullet_train/engine/foundation/foundation.dart';
 import 'package:bullet_train/engine/foundation/computation.dart';
+import 'package:bullet_train/engine/foundation/foundation.dart';
 import 'package:flutter/painting.dart';
 
 class Rails {
