@@ -42,7 +42,7 @@ class _CacheLoaderState extends State<CacheLoader> {
   @override
   Widget build(BuildContext context) {
     return AnimatedOpacity(
-      opacity: isVisible ? 1 : 0.01,
+      opacity: isVisible ? 1 : 0,
       duration: const Duration(milliseconds: 500),
       child: widget.child,
     );
