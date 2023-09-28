@@ -9,19 +9,6 @@
 
 import 'package:flutter/widgets.dart';
 
-class $AssetsAudioGen {
-  const $AssetsAudioGen();
-
-  /// File path: assets/audio/background.mp3
-  String get background => 'assets/audio/background.mp3';
-
-  /// File path: assets/audio/effect.mp3
-  String get effect => 'assets/audio/effect.mp3';
-
-  /// List of all assets
-  List<String> get values => [background, effect];
-}
-
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
@@ -33,28 +20,10 @@ class $AssetsImagesGen {
   List<AssetGenImage> get values => [bulletTrainCharacters];
 }
 
-class $AssetsLicensesGen {
-  const $AssetsLicensesGen();
-
-  $AssetsLicensesPoppinsGen get poppins => const $AssetsLicensesPoppinsGen();
-}
-
-class $AssetsLicensesPoppinsGen {
-  const $AssetsLicensesPoppinsGen();
-
-  /// File path: assets/licenses/poppins/OFL.txt
-  String get ofl => 'assets/licenses/poppins/OFL.txt';
-
-  /// List of all assets
-  List<String> get values => [ofl];
-}
-
 class Assets {
   Assets._();
 
-  static const $AssetsAudioGen audio = $AssetsAudioGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
-  static const $AssetsLicensesGen licenses = $AssetsLicensesGen();
 }
 
 class AssetGenImage {
