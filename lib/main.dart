@@ -16,7 +16,6 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.themeData,
-      home: const MenuPage(),
       routes: {
         '/': (context) => const MenuPage(),
         '/game': (context) => const GamePage(),
