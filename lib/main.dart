@@ -1,4 +1,4 @@
-import 'package:bullet_train/design/app_theme.dart';
+import 'package:bullet_train/design/theme/app_theme.dart';
 import 'package:bullet_train/menu/view/menu_page.dart';
 import 'package:flutter/material.dart';
 

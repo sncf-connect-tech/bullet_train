@@ -1,4 +1,4 @@
-import 'package:bullet_train/design/game_theme.dart';
+import 'package:bullet_train/design/theme/game_theme.dart';
 import 'package:bullet_train/game/bullet_train.dart';
 import 'package:bullet_train/game/components/game_over.dart';
 import 'package:bullet_train/game/components/score_display.dart';

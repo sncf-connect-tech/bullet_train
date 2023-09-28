@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bullet_train/design/design.dart';
 import 'package:bullet_train/game/view/game_page.dart';
-import 'package:bullet_train/gen/assets.gen.dart';
 import 'package:bullet_train/menu/components/difficulty_selector.dart';
 import 'package:bullet_train/menu/components/menu_title.dart';
 import 'package:bullet_train/shared/difficulty.dart';
@@ -96,14 +95,18 @@ class _MenuViewState extends State<MenuView> {
                               Expanded(
                                 child: NavigationButton(
                                   title: 'Score',
-                                  onPressed: () {/* TODO: ScorePage */},
+                                  onPressed: () {
+                                    /* TODO: ScorePage */
+                                  },
                                 ),
                               ),
                               const SizedBox(height: Dimens.columnSpacing),
                               Expanded(
                                 child: NavigationButton(
                                   title: 'À propos',
-                                  onPressed: () {/* TODO: AboutPage */},
+                                  onPressed: () {
+                                    /* TODO: AboutPage */
+                                  },
                                 ),
                               ),
                               const SizedBox(height: Dimens.columnSpacing),
@@ -111,10 +114,14 @@ class _MenuViewState extends State<MenuView> {
                           ),
                         ),
                         const SizedBox(width: Dimens.rowSpacing),
-                        Expanded(
+                        const Expanded(
                           flex: 2,
                           child: NeonEffect(
-                            child: Assets.images.bulletTrainCharacters.image(),
+                            child: Image(
+                              image: AssetImage(
+                                'assets/images/bullet_train_characters.png',
+                              ),
+                            ),
                           ),
                         ),
                       ],
