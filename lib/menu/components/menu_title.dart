@@ -1,4 +1,4 @@
-import 'package:bullet_train/design/components/neon_effect.dart';
+import 'package:bullet_train/design/design.dart';
 import 'package:flutter/material.dart';
 
 class MenuTitle extends StatelessWidget {

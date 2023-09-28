@@ -1,4 +1,4 @@
+export 'atoms/neon_effect.dart';
 export 'colors.dart';
-export 'components/navigation_button.dart';
-export 'components/neon_effect.dart';
 export 'dimens.dart';
+export 'molecules/navigation_button.dart';
