@@ -1,8 +1,7 @@
-import 'dart:async';
-
 import 'package:bullet_train/design/design.dart';
 import 'package:bullet_train/menu/components/difficulty_selector.dart';
 import 'package:bullet_train/menu/components/menu_title.dart';
+import 'package:bullet_train/shared/cache_loader.dart';
 import 'package:bullet_train/shared/difficulty.dart';
 import 'package:flutter/material.dart';
 
@@ -26,24 +25,10 @@ class MenuView extends StatefulWidget {
 
 class _MenuViewState extends State<MenuView> {
   Difficulty difficulty = Difficulty.medium;
-  bool isVisible = false;
-
-  @override
-  void initState() {
-    super.initState();
-
-    Timer(const Duration(milliseconds: 500), () {
-      setState(() {
-        isVisible = true;
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedOpacity(
-      opacity: isVisible ? 1 : 0,
-      duration: const Duration(milliseconds: 500),
+    return CacheLoader(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: Dimens.rowSpacing),
         child: Stack(
@@ -105,13 +90,11 @@ class _MenuViewState extends State<MenuView> {
                           ),
                         ),
                         const SizedBox(width: Dimens.rowSpacing),
-                        const Expanded(
+                        Expanded(
                           flex: 2,
                           child: NeonEffect(
-                            child: Image(
-                              image: AssetImage(
-                                'assets/images/bullet_train_characters.png',
-                              ),
+                            child: Image.asset(
+                              'assets/images/bullet_train_characters.png',
                             ),
                           ),
                         ),

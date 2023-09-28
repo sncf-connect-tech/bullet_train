@@ -10,7 +10,7 @@ dependencies:
   flame: ^1.7.3
   flutter:
     sdk: flutter
-  google_fonts: ^4.0.4
+  google_fonts: ^6.1.0
   mockingjay: ^0.3.0
 
 dev_dependencies:
