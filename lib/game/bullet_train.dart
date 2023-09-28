@@ -1,4 +1,3 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:bullet_train/engine/engine.dart';
 import 'package:bullet_train/game/game.dart';
 import 'package:bullet_train/shared/difficulty.dart';
@@ -12,13 +11,11 @@ import 'package:flutter/widgets.dart';
 class BulletTrain extends FlameGame
     with HasKeyboardHandlerComponents, HasCollisionDetection {
   BulletTrain({
-    required this.effectPlayer,
     required this.difficulty,
     required this.onGameOver,
     GameTheme? theme,
   }) : theme = theme ?? GameTheme.defaultGameTheme;
 
-  final AudioPlayer effectPlayer;
   final GameTheme theme;
   final Difficulty difficulty;
   final VoidCallback onGameOver;

@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:bullet_train/design/design.dart';
 import 'package:bullet_train/game/game.dart';
 import 'package:bullet_train/gen/assets.gen.dart';
+import 'package:bullet_train/menu/components/difficulty_selector.dart';
+import 'package:bullet_train/menu/components/menu_title.dart';
 import 'package:bullet_train/shared/difficulty.dart';
-import 'package:bullet_train/widgets/menu/components/difficulty_selector.dart';
-import 'package:bullet_train/widgets/menu/components/menu_title.dart';
 import 'package:flutter/material.dart';
 
 class MenuPage extends StatelessWidget {

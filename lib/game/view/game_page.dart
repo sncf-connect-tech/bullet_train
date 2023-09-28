@@ -1,11 +1,8 @@
-import 'package:bullet_train/cubit/cubit.dart';
 import 'package:bullet_train/game/game.dart';
 import 'package:bullet_train/shared/difficulty.dart';
 import 'package:bullet_train/theme/theme.dart';
 import 'package:flame/game.dart' hide Route;
-import 'package:flame_audio/bgm.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GamePage extends StatelessWidget {
   const GamePage({required this.difficulty, super.key});
@@ -20,15 +17,10 @@ class GamePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) {
-        return AudioCubit(audioCache: context.read<PreloadCubit>().audio);
-      },
-      child: Scaffold(
-        body: SafeArea(
-          child: GameView(
-            difficulty: difficulty,
-          ),
+    return Scaffold(
+      body: SafeArea(
+        child: GameView(
+          difficulty: difficulty,
         ),
       ),
     );
@@ -49,21 +41,6 @@ class _GameViewState extends State<GameView> {
   FlameGame? _game;
   bool _gameOver = false;
 
-  late final Bgm bgm;
-
-  @override
-  void initState() {
-    super.initState();
-    bgm = context.read<AudioCubit>().bgm;
-    // bgm.play(Assets.audio.background);
-  }
-
-  @override
-  void dispose() {
-    bgm.pause();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     final gameTheme =
@@ -71,7 +48,6 @@ class _GameViewState extends State<GameView> {
 
     _game ??= widget.game ??
         BulletTrain(
-          effectPlayer: context.read<AudioCubit>().effectPlayer,
           theme: gameTheme,
           difficulty: widget.difficulty,
           onGameOver: () {
@@ -95,19 +71,6 @@ class _GameViewState extends State<GameView> {
           left: 30,
           child: ScoreDisplay(game: _game!),
         ),
-        Align(
-          alignment: Alignment.topRight,
-          child: BlocBuilder<AudioCubit, AudioState>(
-            builder: (context, state) {
-              return IconButton(
-                icon: Icon(
-                  state.volume == 0 ? Icons.volume_off : Icons.volume_up,
-                ),
-                onPressed: () => context.read<AudioCubit>().toggleVolume(),
-              );
-            },
-          ),
-        ),
         Center(
           child: GameOver(
             isVisible: _gameOver,
@@ -117,7 +80,6 @@ class _GameViewState extends State<GameView> {
               });
 
               _game = BulletTrain(
-                effectPlayer: context.read<AudioCubit>().effectPlayer,
                 theme: gameTheme,
                 difficulty: widget.difficulty,
                 onGameOver: () {

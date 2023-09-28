@@ -7,7 +7,7 @@ void main() {
       await tester.pumpWidget(const App());
 
       await tester.pumpAndSettle(const Duration(seconds: 400));
-      expect(find.byType(AppView), findsOneWidget);
+      expect(find.byType(App), findsOneWidget);
     });
   });
 }
