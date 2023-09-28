@@ -7,23 +7,15 @@ import 'package:flame/game.dart' hide Route;
 import 'package:flutter/material.dart';
 
 class GamePage extends StatelessWidget {
-  const GamePage({required this.difficulty, super.key});
+  const GamePage({this.difficulty = Difficulty.medium, super.key});
 
   final Difficulty difficulty;
-
-  static Route<void> route({ required Difficulty difficulty}) {
-    return MaterialPageRoute<void>(
-      builder: (_) => GamePage(difficulty: difficulty),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: GameView(
-          difficulty: difficulty,
-        ),
+        child: GameView(difficulty: difficulty),
       ),
     );
   }

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bullet_train/design/design.dart';
-import 'package:bullet_train/game/view/game_page.dart';
 import 'package:bullet_train/menu/components/difficulty_selector.dart';
 import 'package:bullet_train/menu/components/menu_title.dart';
 import 'package:bullet_train/shared/difficulty.dart';
@@ -9,12 +8,6 @@ import 'package:flutter/material.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({super.key});
-
-  static Route<void> route() {
-    return PageRouteBuilder(
-      pageBuilder: (_, __, ___) => const MenuPage(),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,9 +78,7 @@ class _MenuViewState extends State<MenuView> {
                                 child: NavigationButton(
                                   title: 'Démarrer',
                                   onPressed: () {
-                                    Navigator.of(context).push(
-                                      GamePage.route(difficulty: difficulty),
-                                    );
+                                    Navigator.of(context).pushNamed('/game');
                                   },
                                 ),
                               ),

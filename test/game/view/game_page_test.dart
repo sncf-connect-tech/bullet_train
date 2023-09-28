@@ -13,9 +13,7 @@ void main() {
           Builder(
             builder: (context) => Scaffold(
               floatingActionButton: FloatingActionButton(
-                onPressed: () => Navigator.of(context).push(
-                  GamePage.route(difficulty: Difficulty.easy),
-                ),
+                onPressed: () => Navigator.of(context).pushNamed('/game'),
               ),
             ),
           ),
