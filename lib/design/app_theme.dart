@@ -1,5 +1,5 @@
 import 'package:bullet_train/design/colors.dart';
-import 'package:bullet_train/theme/game_theme.dart';
+import 'package:bullet_train/design/game_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

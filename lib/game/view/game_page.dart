@@ -1,8 +1,8 @@
+import 'package:bullet_train/design/game_theme.dart';
 import 'package:bullet_train/game/bullet_train.dart';
 import 'package:bullet_train/game/components/game_over.dart';
 import 'package:bullet_train/game/components/score_display.dart';
 import 'package:bullet_train/shared/difficulty.dart';
-import 'package:bullet_train/theme/game_theme.dart';
 import 'package:flame/game.dart' hide Route;
 import 'package:flutter/material.dart';
 
