@@ -1,0 +1,27 @@
+name: bullet_train
+description: Train/snake game
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flame: 1.9.0
+  flutter:
+    sdk: flutter
+  google_fonts: ^6.1.0
+  mockingjay: ^0.4.0
+
+dev_dependencies:
+  flame_test: ^1.10.1
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.0
+  very_good_analysis: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
