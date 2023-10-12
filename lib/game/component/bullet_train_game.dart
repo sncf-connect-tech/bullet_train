@@ -4,7 +4,6 @@ import 'package:bullet_train/game/component/background_component.dart';
 import 'package:bullet_train/game/component/train_component.dart';
 import 'package:bullet_train/game/component/travelers_component.dart';
 import 'package:bullet_train/game/manager/game_manager.dart';
-import 'package:bullet_train/game/manager/score_manager.dart';
 import 'package:flame/camera.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
@@ -18,7 +17,6 @@ class BulletTrainGame extends FlameGame
 
   final GameTheme theme;
   late GameManager gameManager;
-  late ScoreManager scoreManager;
   late final CellsMatrix matrix;
   late TrainComponent trainComponent;
   late TravelersComponent travelersComponent;
@@ -26,9 +24,7 @@ class BulletTrainGame extends FlameGame
   final World _world = World();
 
   void startGame() {
-    overlays
-      ..add('scoreOverlay')
-      ..remove('gameOverOverlay');
+    overlays.remove('gameOverOverlay');
   }
 
   void gameOver() {
@@ -45,7 +41,6 @@ class BulletTrainGame extends FlameGame
     _world
       ..add(trainComponent)
       ..add(travelersComponent);
-    scoreManager.reset();
     gameManager.reset();
     startGame();
   }
@@ -55,7 +50,6 @@ class BulletTrainGame extends FlameGame
     await super.onLoad();
     matrix = CellsMatrix(gridSize: theme.gridSize);
     gameManager = GameManager();
-    scoreManager = ScoreManager();
     trainComponent = TrainComponent();
     travelersComponent = TravelersComponent();
 
@@ -64,7 +58,6 @@ class BulletTrainGame extends FlameGame
       trainComponent,
       travelersComponent,
       gameManager,
-      scoreManager,
     ]);
 
     final camera = CameraComponent(
