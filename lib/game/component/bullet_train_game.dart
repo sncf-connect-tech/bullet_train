@@ -2,7 +2,6 @@ import 'package:bullet_train/design/theme/game_theme.dart';
 import 'package:bullet_train/engine/engine.dart';
 import 'package:bullet_train/game/component/background_component.dart';
 import 'package:bullet_train/game/component/train_component.dart';
-import 'package:bullet_train/game/manager/game_manager.dart';
 import 'package:flame/camera.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
@@ -14,40 +13,20 @@ class BulletTrainGame extends FlameGame with HasKeyboardHandlerComponents {
   BulletTrainGame({required this.theme});
 
   final GameTheme theme;
-  late GameManager gameManager;
   late final CellsMatrix matrix;
   late TrainComponent trainComponent;
 
   final World _world = World();
 
-  void startGame() {
-    overlays.remove('gameOverOverlay');
-  }
-
-  void gameOver() {
-    gameManager.gameOver();
-    overlays.add('gameOverOverlay');
-  }
-
-  void resetGame() {
-    _world.remove(trainComponent);
-    trainComponent = TrainComponent();
-    _world.add(trainComponent);
-    gameManager.reset();
-    startGame();
-  }
-
   @override
   Future<void> onLoad() async {
     await super.onLoad();
     matrix = CellsMatrix(gridSize: theme.gridSize);
-    gameManager = GameManager();
     trainComponent = TrainComponent();
 
     await _world.addAll([
       BackgroundComponent(),
       trainComponent,
-      gameManager,
     ]);
 
     final camera = CameraComponent(
@@ -58,13 +37,6 @@ class BulletTrainGame extends FlameGame with HasKeyboardHandlerComponents {
     );
 
     await addAll([_world, camera]);
-    startGame();
-  }
-
-  @override
-  void update(double dt) {
-    if (gameManager.isGameOver) return;
-    super.update(dt);
   }
 
   @override

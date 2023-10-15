@@ -69,10 +69,6 @@ class TrainComponent extends Component
   @override
   void update(double dt) {
     super.update(dt);
-    if (_wagons.isEmpty) {
-      gameRef.gameOver();
-      return;
-    }
     _moveForward(3 * dt);
   }
 
