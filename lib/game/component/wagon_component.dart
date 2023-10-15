@@ -9,7 +9,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
 
-final class WagonComponent extends SpriteAnimationComponent
+final class WagonComponent extends RectangleComponent
     with
         HasGameRef<BulletTrainGame>,
         CollisionCallbacks,
@@ -25,7 +25,6 @@ final class WagonComponent extends SpriteAnimationComponent
   @override
   Future<void> onLoad() async {
     await super.onLoad();
-    await _loadSpriteAnimation();
     _setSize();
   }
 
@@ -73,26 +72,5 @@ final class WagonComponent extends SpriteAnimationComponent
         }
     }
     gameRef.travelersComponent.addTravelersIfPossible();
-  }
-
-  Future<void> _loadSpriteAnimation() async {
-    final String filename;
-
-    switch (wagon) {
-      case HeadWagon():
-        filename = 'head.png';
-      case BodyWagon():
-        filename = 'car.png';
-    }
-
-    animation = await gameRef.loadSpriteAnimation(
-      filename,
-      SpriteAnimationData.sequenced(
-        amount: 8,
-        amountPerRow: 4,
-        stepTime: 0.5,
-        textureSize: Vector2(64, 32),
-      ),
-    );
   }
 }
