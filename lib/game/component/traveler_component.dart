@@ -1,6 +1,5 @@
 import 'package:bullet_train/engine/engine.dart';
 import 'package:bullet_train/game/component/bullet_train_game.dart';
-import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
 
@@ -31,7 +30,6 @@ class TravelerComponent extends CircleComponent
     final theme = gameRef.theme;
     final trainSizeFactor = theme.trainSizeFactor;
     size = Vector2(trainSizeFactor, trainSizeFactor);
-    add(CircleHitbox());
 
     switch (traveler.type) {
       case TravelerType.hero:

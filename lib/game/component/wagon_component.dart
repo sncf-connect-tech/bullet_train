@@ -2,18 +2,12 @@ import 'dart:async';
 import 'dart:collection';
 
 import 'package:bullet_train/engine/engine.dart';
-import 'package:bullet_train/game/component/background_component.dart';
 import 'package:bullet_train/game/component/bullet_train_game.dart';
-import 'package:bullet_train/game/component/traveler_component.dart';
-import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
 
 final class WagonComponent extends RectangleComponent
-    with
-        HasGameRef<BulletTrainGame>,
-        CollisionCallbacks,
-        LinkedListEntry<WagonComponent> {
+    with HasGameRef<BulletTrainGame>, LinkedListEntry<WagonComponent> {
   WagonComponent({required this.wagon})
       : super(
           priority: GameLayer.train.priority,
@@ -42,35 +36,5 @@ final class WagonComponent extends RectangleComponent
     final theme = gameRef.theme;
     final trainSizeFactor = theme.trainSizeFactor;
     size = Vector2(trainSizeFactor, trainSizeFactor / 2);
-    add(
-      RectangleHitbox(
-        collisionType: switch (wagon) {
-          HeadWagon() => CollisionType.active,
-          BodyWagon() => CollisionType.passive
-        },
-      ),
-    );
-  }
-
-  @override
-  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
-    super.onCollision(intersectionPoints, other);
-    switch (other) {
-      case BackgroundComponent():
-      case WagonComponent():
-        if (previous != other && next != other) {
-          gameRef.gameOver();
-        }
-      case TravelerComponent():
-        gameRef.travelersComponent.removeTraveler(other.traveler);
-        other.removeFromParent();
-        switch (other.traveler.type) {
-          case TravelerType.hero:
-            gameRef.trainComponent.addWagon();
-          case TravelerType.vilain:
-            gameRef.trainComponent.removeWagon();
-        }
-    }
-    gameRef.travelersComponent.addTravelersIfPossible();
   }
 }

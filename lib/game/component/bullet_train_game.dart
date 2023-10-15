@@ -11,8 +11,7 @@ import 'package:flame/game.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-class BulletTrainGame extends FlameGame
-    with HasKeyboardHandlerComponents, HasCollisionDetection {
+class BulletTrainGame extends FlameGame with HasKeyboardHandlerComponents {
   BulletTrainGame({required this.theme});
 
   final GameTheme theme;

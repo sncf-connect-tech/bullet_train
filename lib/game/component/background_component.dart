@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bullet_train/engine/engine.dart';
 import 'package:bullet_train/game/component/bullet_train_game.dart';
-import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 
 class BackgroundComponent extends PositionComponent
@@ -14,7 +13,6 @@ class BackgroundComponent extends PositionComponent
     await super.onLoad();
 
     size = gameRef.theme.gridSize.toVector2();
-    add(RectangleHitbox());
 
     for (final cell in gameRef.matrix.cells) {
       add(
