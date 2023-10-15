@@ -1,12 +1,10 @@
-import 'dart:math';
-
 import 'package:bullet_train/engine/engine.dart';
 import 'package:bullet_train/game/component/bullet_train_game.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
 
-class TravelerComponent extends SpriteComponent
+class TravelerComponent extends CircleComponent
     with HasGameRef<BulletTrainGame> {
   TravelerComponent({
     required this.traveler,
@@ -20,7 +18,6 @@ class TravelerComponent extends SpriteComponent
   @override
   Future<void> onLoad() async {
     await super.onLoad();
-    await _loadSprite();
     setSize();
   }
 
@@ -35,19 +32,12 @@ class TravelerComponent extends SpriteComponent
     final trainSizeFactor = theme.trainSizeFactor;
     size = Vector2(trainSizeFactor, trainSizeFactor);
     add(CircleHitbox());
-  }
-
-  Future<void> _loadSprite() async {
-    final String filename;
 
     switch (traveler.type) {
       case TravelerType.hero:
-        filename = 'suitcase.png';
+        paint.color = gameRef.theme.travelerHeroColor;
       case TravelerType.vilain:
-        final n = Random().nextInt(3) + 1;
-        filename = 'villain$n.png';
+        paint.color = gameRef.theme.travelerVillainColor;
     }
-
-    sprite = await gameRef.loadSprite(filename);
   }
 }
