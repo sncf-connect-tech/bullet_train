@@ -2,7 +2,6 @@ import 'package:bullet_train/design/theme/game_theme.dart';
 import 'package:bullet_train/engine/engine.dart';
 import 'package:bullet_train/game/component/background_component.dart';
 import 'package:bullet_train/game/component/train_component.dart';
-import 'package:bullet_train/game/component/travelers_component.dart';
 import 'package:bullet_train/game/manager/game_manager.dart';
 import 'package:bullet_train/game/manager/score_manager.dart';
 import 'package:flame/camera.dart';
@@ -20,7 +19,6 @@ class BulletTrainGame extends FlameGame with HasKeyboardHandlerComponents {
   late ScoreManager scoreManager;
   late final CellsMatrix matrix;
   late TrainComponent trainComponent;
-  late TravelersComponent travelersComponent;
 
   final World _world = World();
 
@@ -34,14 +32,9 @@ class BulletTrainGame extends FlameGame with HasKeyboardHandlerComponents {
   }
 
   void resetGame() {
-    _world
-      ..remove(travelersComponent)
-      ..remove(trainComponent);
+    _world.remove(trainComponent);
     trainComponent = TrainComponent();
-    travelersComponent = TravelersComponent();
-    _world
-      ..add(trainComponent)
-      ..add(travelersComponent);
+    _world.add(trainComponent);
     gameManager.reset();
     startGame();
   }
@@ -52,12 +45,10 @@ class BulletTrainGame extends FlameGame with HasKeyboardHandlerComponents {
     matrix = CellsMatrix(gridSize: theme.gridSize);
     gameManager = GameManager();
     trainComponent = TrainComponent();
-    travelersComponent = TravelersComponent();
 
     await _world.addAll([
       BackgroundComponent(),
       trainComponent,
-      travelersComponent,
       gameManager,
     ]);
 
