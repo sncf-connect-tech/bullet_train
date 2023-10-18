@@ -26,9 +26,7 @@ class BulletTrainGame extends FlameGame
   final World _world = World();
 
   void startGame() {
-    overlays
-      ..add('scoreOverlay')
-      ..remove('gameOverOverlay');
+    overlays.remove('gameOverOverlay');
   }
 
   void gameOver() {
@@ -45,7 +43,6 @@ class BulletTrainGame extends FlameGame
     _world
       ..add(trainComponent)
       ..add(travelersComponent);
-    scoreManager.reset();
     gameManager.reset();
     startGame();
   }
@@ -55,7 +52,6 @@ class BulletTrainGame extends FlameGame
     await super.onLoad();
     matrix = CellsMatrix(gridSize: theme.gridSize);
     gameManager = GameManager();
-    scoreManager = ScoreManager();
     trainComponent = TrainComponent();
     travelersComponent = TravelersComponent();
 
@@ -64,7 +60,6 @@ class BulletTrainGame extends FlameGame
       trainComponent,
       travelersComponent,
       gameManager,
-      scoreManager,
     ]);
 
     final camera = CameraComponent(

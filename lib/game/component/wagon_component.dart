@@ -65,10 +65,8 @@ final class WagonComponent extends SpriteAnimationComponent
 
         switch (other.type) {
           case TravelerType.hero:
-            gameRef.scoreManager.increaseScore();
             gameRef.trainComponent.addWagon();
           case TravelerType.vilain:
-            gameRef.scoreManager.decreaseScore();
             gameRef.trainComponent.removeWagon();
         }
 
